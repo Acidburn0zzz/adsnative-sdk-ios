@@ -61,12 +61,18 @@
             [nativeAssets setObject:fbNativeAd.coverImage.url.absoluteString forKey:kNativeMainImageKey];
         }
         
+        NSMutableDictionary *customAssets = [[NSMutableDictionary alloc] init];
+        
         if (fbNativeAd.placementID) {
-            [nativeAssets setObject:fbNativeAd.placementID forKey:@"placementID"];
+            [customAssets setObject:fbNativeAd.placementID forKey:@"placementID"];
         }
         
         if (fbNativeAd.socialContext) {
-            [nativeAssets setObject:fbNativeAd.socialContext forKey:@"socialContext"];
+            [customAssets setObject:fbNativeAd.socialContext forKey:@"socialContext"];
+        }
+        
+        if ([customAssets count] != 0) {
+            [nativeAssets setObject:customAssets forKey:kNativeCustomAssetsKey];
         }
         
         //For video ads
