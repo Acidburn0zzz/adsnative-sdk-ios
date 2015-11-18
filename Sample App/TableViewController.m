@@ -45,7 +45,7 @@
     //The defaultRenderingClass can be switched to `ANAdTableViewCellNew` dynamically by specifying it in the AdsNative UI
     self.placer = [ANTableViewAdPlacer placerWithTableView:self.tableView viewController:self adPositions:serverAdPositions defaultAdRenderingClass:[ANAdTableViewCell class]];
     
-    [self.placer loadAdsForAdUnitID:@"mZE7zov4RiWtwOWAZpemlRBJVMur26isJ-HexPyk"];
+    [self.placer loadAdsForAdUnitID:@"I6jzxM3nheJk4RVIstiPKGN7YHOBKag-Q_5b0AnV"];
     
 }
 

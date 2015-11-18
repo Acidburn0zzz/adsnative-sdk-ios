@@ -15,7 +15,7 @@ extern const NSString *kNativeIconImageKey;
 extern const NSString *kNativeMainImageKey;
 extern const NSString *kNativeCTATextKey;
 extern const NSString *kNativeStarRatingKey;
-
+//May be nil.
 extern const NSString *kNativeMediaViewKey;
 
 //Eg: "Sponsored", "Promoted"
