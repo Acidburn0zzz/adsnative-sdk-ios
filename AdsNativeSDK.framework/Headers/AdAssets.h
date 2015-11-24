@@ -26,3 +26,10 @@ extern const NSString *kNativeSponsoredByTagKey;
 
 //May be nil. This returns a dictionary of developer defined custom assests. Only for AdsNative direct demand.
 extern const NSString *kNativeCustomAssetsKey;
+
+extern const NSString *kNativeBackUpRequiredKey;
+
+//Trackers and landing url
+extern const NSString *kNativeImpressionsKey;
+extern const NSString *kNativeClicksKey;
+extern const NSString *kNativeLandingUrlKey;
