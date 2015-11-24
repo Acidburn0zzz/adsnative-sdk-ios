@@ -26,6 +26,8 @@
 
 @implementation TableViewController
 
+static NSString *const simpleTableIdentifier = @"SimpleTableCell";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -40,6 +42,9 @@
     _prepTimes = [NSArray arrayWithObjects:@"30min",@"25min",@"40min",@"15min",@"10min",@"45min",@"40min",
                   @"10min",@"15min",@"5min",@"15min",@"20min",@"5min",@"50min",@"55min",@"30min",nil];
 
+    // Register cell nib
+    [self.tableView registerNib:[UINib nibWithNibName:@"SimpleTableViewCell" bundle:nil] forCellReuseIdentifier:simpleTableIdentifier];
+    
     ANServerAdPositions *serverAdPositions = [[ANServerAdPositions alloc] init];
     
     //The defaultRenderingClass can be switched to `ANAdTableViewCellNew` dynamically by specifying it in the AdsNative UI
@@ -61,8 +66,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *simpleTableIdentifier = @"SimpleTableCell";
-    
     //Using 'an_' counterpart for tableview methods
     SimpleTableViewCell *cell = (SimpleTableViewCell *)[tableView an_dequeueReusableCellWithIdentifier:simpleTableIdentifier forIndexPath:indexPath];
     
