@@ -63,7 +63,8 @@
 {
     static NSString *simpleTableIdentifier = @"SimpleTableCell";
     
-    SimpleTableViewCell *cell = (SimpleTableViewCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    //Using 'an_' counterpart for tableview methods
+    SimpleTableViewCell *cell = (SimpleTableViewCell *)[tableView an_dequeueReusableCellWithIdentifier:simpleTableIdentifier forIndexPath:indexPath];
     
     if (cell == nil) {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SimpleTableViewCell" owner:self options:nil];

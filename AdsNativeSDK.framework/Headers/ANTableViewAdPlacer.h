@@ -334,7 +334,7 @@
  * @return An array of `NSIndexPath` objects each representing a row and section index identifying
  * a row within *rect*. Index paths representing ads are not returned.
  */
-- (NSArray *)an_indexPathsForRowsInRect:(CGRect)rect;
+- (NSArray <NSIndexPath *> *)an_indexPathsForRowsInRect:(CGRect)rect;
 
 /**
  * Returns an array of the original index paths for the selected rows, as if no ads have been
@@ -342,7 +342,7 @@
  *
  * @return An array of the original index paths for the selected rows.
  */
-- (NSArray *)an_indexPathsForSelectedRows;
+- (NSArray <NSIndexPath *> *)an_indexPathsForSelectedRows;
 
 /**
  * Returns an array of index paths each identifying a visible non-ad row in the table view,
@@ -351,7 +351,7 @@
  * @return An array of `NSIndexPath` objects each representing a visible non-ad row in the table
  * view. Returns `nil` if no rows are visible.
  */
-- (NSArray *)an_indexPathsForVisibleRows;
+- (NSArray <NSIndexPath *> *)an_indexPathsForVisibleRows;
 
 /**
  * Returns the drawing area for a row identified by index path.

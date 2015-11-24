@@ -303,7 +303,7 @@
  *
  * @return An array of the original index paths for the selected items.
  */
-- (NSArray *)an_indexPathsForSelectedItems;
+- (NSArray <NSIndexPath *> *)an_indexPathsForSelectedItems;
 
 /**
  * Returns an array of original index paths each identifying a visible non-ad item in the collection
@@ -312,7 +312,7 @@
  * @return An array of the original index paths representing visible non-ad items in the collection
  * view. Returns `nil` if no items are visible.
  */
-- (NSArray *)an_indexPathsForVisibleItems;
+- (NSArray <NSIndexPath *> *)an_indexPathsForVisibleItems;
 
 /**
  * Returns the layout information for the item at the specified index path.

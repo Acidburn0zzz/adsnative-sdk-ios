@@ -11,7 +11,6 @@
 		5C01DBA01BC2FCE100491F9B /* SimpleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C01DB9F1BC2FCE100491F9B /* SimpleTableViewCell.m */; };
 		5C01DBA41BC3044A00491F9B /* ANAdTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C01DBA21BC3044A00491F9B /* ANAdTableViewCell.m */; };
 		5C01DBA51BC3044A00491F9B /* ANAdTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C01DBA31BC3044A00491F9B /* ANAdTableViewCell.xib */; };
-		5C112B4B1BF5E25A007943DA /* AdsNativeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C112B4A1BF5E25A007943DA /* AdsNativeSDK.framework */; };
 		5C112CC61BF9D4D1007943DA /* MPBannerAdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C112B551BF9D4D0007943DA /* MPBannerAdManager.m */; };
 		5C112CC71BF9D4D1007943DA /* MPBannerCustomEventAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C112B581BF9D4D0007943DA /* MPBannerCustomEventAdapter.m */; };
 		5C112CC81BF9D4D1007943DA /* MPBaseBannerAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C112B5A1BF9D4D0007943DA /* MPBaseBannerAdapter.m */; };
@@ -219,6 +218,7 @@
 		5CBE8AB31BA96D95000DBCFE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CBE8AB21BA96D95000DBCFE /* Images.xcassets */; };
 		5CBE8AB61BA96D95000DBCFE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CBE8AB41BA96D95000DBCFE /* LaunchScreen.xib */; };
 		5CBE8AC21BA96D95000DBCFE /* AdsNative_iOS_SDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBE8AC11BA96D95000DBCFE /* AdsNative_iOS_SDKTests.m */; };
+		5CD0DAD81C040A3800435100 /* AdsNativeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CD0DAD71C040A3800435100 /* AdsNativeSDK.framework */; };
 		5CDEEFBA1BC6EB5200C315D5 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CDEEFB91BC6EB5200C315D5 /* AdSupport.framework */; };
 		5CDEEFBC1BC6EB6700C315D5 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CDEEFBB1BC6EB6700C315D5 /* SafariServices.framework */; };
 		5CDEEFBE1BC6EC3300C315D5 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CDEEFBD1BC6EC3300C315D5 /* libsqlite3.dylib */; };
@@ -260,7 +260,6 @@
 		5C01DBA11BC3044A00491F9B /* ANAdTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANAdTableViewCell.h; sourceTree = "<group>"; };
 		5C01DBA21BC3044A00491F9B /* ANAdTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANAdTableViewCell.m; sourceTree = "<group>"; };
 		5C01DBA31BC3044A00491F9B /* ANAdTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANAdTableViewCell.xib; sourceTree = "<group>"; };
-		5C112B4A1BF5E25A007943DA /* AdsNativeSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AdsNativeSDK.framework; sourceTree = "<group>"; };
 		5C112B511BF9D4D0007943DA /* FABKitProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FABKitProtocol.h; sourceTree = "<group>"; };
 		5C112B541BF9D4D0007943DA /* MPBannerAdManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPBannerAdManager.h; sourceTree = "<group>"; };
 		5C112B551BF9D4D0007943DA /* MPBannerAdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPBannerAdManager.m; sourceTree = "<group>"; };
@@ -686,6 +685,7 @@
 		5CBE8ABB1BA96D95000DBCFE /* Sample App.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sample App.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CBE8AC01BA96D95000DBCFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CBE8AC11BA96D95000DBCFE /* AdsNative_iOS_SDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdsNative_iOS_SDKTests.m; sourceTree = "<group>"; };
+		5CD0DAD71C040A3800435100 /* AdsNativeSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AdsNativeSDK.framework; sourceTree = "<group>"; };
 		5CDEEFB91BC6EB5200C315D5 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		5CDEEFBB1BC6EB6700C315D5 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		5CDEEFBD1BC6EC3300C315D5 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
@@ -716,7 +716,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C112B4B1BF5E25A007943DA /* AdsNativeSDK.framework in Frameworks */,
+				5CD0DAD81C040A3800435100 /* AdsNativeSDK.framework in Frameworks */,
 				5C9CB0801BEB23B8001C28DC /* libz.1.dylib in Frameworks */,
 				5C9CB01B1BEB209D001C28DC /* libz.tbd in Frameworks */,
 				5C9CB0191BEB1F86001C28DC /* libz.1.tbd in Frameworks */,
@@ -768,7 +768,7 @@
 		5C01DC161BC67E7600491F9B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5C112B4A1BF5E25A007943DA /* AdsNativeSDK.framework */,
+				5CD0DAD71C040A3800435100 /* AdsNativeSDK.framework */,
 				5C9CB01A1BEB209D001C28DC /* libz.tbd */,
 				5C9CB0181BEB1F86001C28DC /* libz.1.tbd */,
 				5C9CB0101BEB0E23001C28DC /* libz.1.dylib */,
