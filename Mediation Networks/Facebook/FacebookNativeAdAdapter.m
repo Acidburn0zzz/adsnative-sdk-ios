@@ -79,7 +79,10 @@
         FBMediaView *mediaView = [[FBMediaView alloc] initWithNativeAd:fbNativeAd];
         [nativeAssets setObject:mediaView forKey:kNativeMediaViewKey];
         
-        [nativeAssets setObject:@"Sponsored" forKey:kNativeSponsoredKey];
+        [nativeAssets setObject:@"Sponsored" forKey:kNativeSponsoredByTagKey];
+        
+        //Ad Choices View
+        [nativeAssets setObject:[[FBAdChoicesView alloc] initWithNativeAd:fbNativeAd] forKey:kNativeAdChoicesKey];
         
         _nativeAssets = nativeAssets;
     }
@@ -88,6 +91,10 @@
 }
 
 #pragma mark - AdAdapter
+- (BOOL)isMediaView
+{
+    return YES;
+}
 
 - (NSTimeInterval)requiredSecondsForImpression
 {
