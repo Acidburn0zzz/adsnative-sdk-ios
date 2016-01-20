@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AdsNativeSDK/AdsNativeSDK.h>
+//#import "ANTableViewAdPlacer.h"
+//#import "ANAdRequestTargeting.h"
+//#import "Logging.h"
 
 @interface TableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 

@@ -7,9 +7,9 @@
 //
 
 #import "NativeAdViewController.h"
-#import <AdsNativeSDK/ANNativeAd.h>
-#import <AdsNativeSDK/ANNativeAdDelegate.h>
 #import "TableViewController.h"
+
+#import <AdsNativeSDK/AdsNativeSDK.h>
 
 @interface NativeAdViewController () <ANNativeAdDelegate>
 
@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     // Do any additional setup after loading the view from its nib.
     
     [_loadTableViewButton addTarget:self action:@selector(loadTableViewAds) forControlEvents:UIControlEventTouchUpInside];
@@ -29,7 +29,7 @@
     
     [self.indicator startAnimating];
     
-    self.nativeAd = [[ANNativeAd alloc] initWithAdUnitId:@"I6jzxM3nheJk4RVIstiPKGN7YHOBKag-Q_5b0AnV"];
+    self.nativeAd = [[ANNativeAd alloc] initWithAdUnitId:@"_WSCwPg4czQD8NRuCC0v9qVObfyDj7FnQoZPW0uF" viewController:self];
     self.nativeAd.delegate = self;
     [self.nativeAd loadAd];
 }
@@ -38,53 +38,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-- (void)nativeAdDidLoad:(ANNativeAd *)nativeAd {
-
-    //Use this for dynamic layout switching. Make sure your UIView class implements `ANAdRendering` protocol
-//    UIView * adView = [nativeAd renderNativeAdWithController:self defaultRenderingClass:[NativeAdView class]];
-   
-    UIView *adView = [[NativeAdView alloc] init];
- 
-    CGRect frame = self.adViewContainer.frame;
-    //resetting the origin of the frame otherwise subview will be displaced
-    frame.origin = CGPointMake(0.0f, 0.0f);
-    [adView setFrame:frame];
-    
-    [nativeAd registerNativeAdWithController:self forView:adView];
-    
-    //Removing all subviews (adView) from adViewContainer
-    [[self.adViewContainer subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
-    [self.adViewContainer addSubview:adView];
-    
-    [self.indicator stopAnimating];
-    
-}
-
-- (void)nativeAd:(ANNativeAd *)nativeAd didFailWithError:(NSError *)error {
-    NSLog(@"Native ad request failed with error:%@",error);
-    [self.indicator stopAnimating];
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Native ad failed to load"
-                                                    message:@"Check console for more details"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    
-    [alert show];
-}
-
-- (void)nativeAdDidRecordImpression
-{
-    NSLog(@"Native Ad Impression Recorded");
-}
-
-- (void)nativeAdDidClick
-{
-    NSLog(@"Native Ad Did Click");
-}
-
 
 - (void)loadNativeAd
 {
@@ -97,14 +50,61 @@
     TableViewController *tableViewController = [[TableViewController alloc] init];
     [self presentViewController:tableViewController animated:YES completion:nil];
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - <ANNativeAdDelegate>
+- (void)anNativeAdDidLoad:(ANNativeAd *)nativeAd {
+    [self.indicator stopAnimating];
+    
+    //have a strong retain of the native ad instance
+    self.nativeAd = nativeAd;
+    
+    //Use this for dynamic layout switching. Make sure your UIView class implements `ANAdRendering` protocol
+    UIView *adView =[nativeAd renderNativeAdWithDefaultRenderingClass:[NativeAdView class]];
+    
+    adView.frame = self.adViewContainer.bounds;
+    
+    /* You may call this instead of `renderNativeAdWithDefaultRenderingClass` if you wish to pass the ad view directly.*/
+//    [nativeAd registerNativeAdForView:adView];
+    
+    //Removing all subviews (adView) from adViewContainer
+    [[self.adViewContainer subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    [self.adViewContainer addSubview:adView];
+       
 }
-*/
+
+- (void)anNativeAd:(ANNativeAd *)nativeAd didFailWithError:(NSError *)error {
+    NSLog(@"Native ad request failed with error:%@",error);
+    [self.indicator stopAnimating];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Native ad failed to load"
+                                                    message:@"Check console for more details"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    
+    [alert show];
+}
+
+- (void)anNativeAdDidRecordImpression
+{
+    NSLog(@"Native Ad Impression Recorded");
+}
+
+- (BOOL)anNativeAdDidClick:(ANNativeAd *)nativeAd
+{
+    NSLog(@"Native Ad Did Click");
+//    NSString *landingUrl = [nativeAd.nativeAssets objectForKey:kNativeLandingUrlKey];
+//    NSLog(@"Landing url:%@",landingUrl);
+//    if ([nativeAd.providerName isEqualToString:@"adsnative"]) {
+//
+//        /** Handle Click **/
+//        return YES;
+//    } else {
+//        return NO;
+//    }
+    
+    return NO;
+}
 
 @end

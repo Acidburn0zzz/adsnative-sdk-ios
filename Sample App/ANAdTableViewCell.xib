@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -25,24 +25,13 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Summary" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8rd-L2-py5">
-                        <rect key="frame" x="8" y="166" width="181" height="50"/>
-                        <animations/>
-                        <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="12"/>
-                        <color key="textColor" red="0.23356613005050508" green="0.23356613005050508" blue="0.23356613005050508" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sponsored" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nFy-PE-jcU">
                         <rect key="frame" x="65" y="26" width="247" height="21"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E0J-6Q-Zge">
-                        <rect key="frame" x="8" y="51" width="304" height="107"/>
-                        <animations/>
-                    </imageView>
                     <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hng-Xp-VRD">
                         <rect key="frame" x="197" y="166" width="115" height="30"/>
                         <animations/>
@@ -53,6 +42,17 @@
                             <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NhU-qH-IFK">
+                        <rect key="frame" x="8" y="51" width="304" height="107"/>
+                        <animations/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Summary" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8rd-L2-py5">
+                        <rect key="frame" x="8" y="166" width="181" height="50"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="12"/>
+                        <color key="textColor" red="0.23356613005050508" green="0.23356613005050508" blue="0.23356613005050508" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <animations/>
             </tableViewCellContentView>
@@ -60,7 +60,7 @@
             <connections>
                 <outlet property="callToActionButton" destination="Hng-Xp-VRD" id="MFb-ca-9m9"/>
                 <outlet property="iconImageView" destination="hEo-Sd-Z8U" id="qWB-7E-4dv"/>
-                <outlet property="mainImageView" destination="E0J-6Q-Zge" id="sTG-bh-nv5"/>
+                <outlet property="mainImageView" destination="NhU-qH-IFK" id="4IU-u1-wm3"/>
                 <outlet property="mainTextLabel" destination="8rd-L2-py5" id="z9x-5h-yKX"/>
                 <outlet property="sponsoredText" destination="nFy-PE-jcU" id="mta-f6-szf"/>
                 <outlet property="titleLabel" destination="J0k-c7-GcW" id="6F6-i1-1Hk"/>

@@ -26,9 +26,6 @@
     [adObject loadTextIntoLabel:self.mainTextLabel];
     [adObject loadCallToActionTextIntoButton:self.callToActionButton];
     [adObject loadIconIntoImageView:self.iconImageView];
-    //    [adObject loadSponsoredTagIntoLabel:self.titleLabel];
-    //    [adObject loadImageIntoImageView:self.mainImageView];
-    
 }
 
 + (CGSize)sizeWithMaximumWidth:(CGFloat)maximumWidth

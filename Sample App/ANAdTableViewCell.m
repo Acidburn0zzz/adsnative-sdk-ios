@@ -27,15 +27,8 @@
     [adObject loadCallToActionTextIntoButton:self.callToActionButton];
     [adObject loadIconIntoImageView:self.iconImageView];
     [adObject loadSponsoredTagIntoLabel:self.sponsoredText];
+    [adObject loadImageIntoImageView:self.mainImageView];
     
-    //For video ads in place of main image
-    UIView *mediaView = [adObject.nativeAssets objectForKey:kNativeMediaViewKey];
-    if (mediaView != nil) {
-        mediaView.frame = self.mainImageView.frame;
-        [self addSubview:mediaView];
-    } else {
-        [adObject loadImageIntoImageView:self.mainImageView];
-    }
 }
 
 + (CGSize)sizeWithMaximumWidth:(CGFloat)maximumWidth

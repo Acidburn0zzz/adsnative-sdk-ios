@@ -12,9 +12,8 @@
 #import "ANAdTableViewCell.h"
 #import "ANAdTableViewCellNew.h"
 
-#import <AdsNativeSDK/AdsNativeSDK.h>
 
-@interface TableViewController ()
+@interface TableViewController () <ANTableViewAdPlacerDelegate>
 
 @property (nonatomic,strong) NSArray *tableData;
 @property (nonatomic,strong) NSArray *thumbnails;
@@ -46,12 +45,11 @@ static NSString *const simpleTableIdentifier = @"SimpleTableCell";
     [self.tableView registerNib:[UINib nibWithNibName:@"SimpleTableViewCell" bundle:nil] forCellReuseIdentifier:simpleTableIdentifier];
     
     ANServerAdPositions *serverAdPositions = [[ANServerAdPositions alloc] init];
-    
     //The defaultRenderingClass can be switched to `ANAdTableViewCellNew` dynamically by specifying it in the AdsNative UI
     self.placer = [ANTableViewAdPlacer placerWithTableView:self.tableView viewController:self adPositions:serverAdPositions defaultAdRenderingClass:[ANAdTableViewCell class]];
+    self.placer.delegate = self;
     
-    [self.placer loadAdsForAdUnitID:@"I6jzxM3nheJk4RVIstiPKGN7YHOBKag-Q_5b0AnV"];
-    
+    [self.placer loadAdsForAdUnitID:@"_WSCwPg4czQD8NRuCC0v9qVObfyDj7FnQoZPW0uF"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,5 +87,17 @@ static NSString *const simpleTableIdentifier = @"SimpleTableCell";
 - (IBAction)dismissViewController:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - ANTableViewAdPlacerDelegate
+- (void)anNativeAdDidRecordImpression
+{
+    NSLog(@"Inside TableView Recorded Impression");
+}
+
+- (BOOL)anNativeAdDidClick:(ANNativeAd *)nativeAd
+{
+    NSLog(@"Inside TableView Recorded Click");
+    return NO;
 }
 @end

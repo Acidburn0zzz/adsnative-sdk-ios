@@ -17,4 +17,5 @@
 @property (strong, nonatomic) IBOutlet UIButton *loadNativeAdButton;
 
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
+
 @end

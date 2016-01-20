@@ -18,4 +18,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *mainImage;
 @property (strong, nonatomic) IBOutlet UILabel *sponsoredText;
 
+@property (strong, nonatomic) IBOutlet UIView *mediaView;
+@property (strong, nonatomic) IBOutlet UIView *adChoicesView;
 @end
