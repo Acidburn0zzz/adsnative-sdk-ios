@@ -11,4 +11,6 @@
 
 @interface MoPubHiddenView : UIView <MPNativeAdRendering>
 
+@property (nonatomic, strong) UIImageView *privacyIconImage;
+
 @end

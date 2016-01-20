@@ -22,7 +22,6 @@
     NSString *placementID = [info objectForKey:@"placementId"];
     
     if (placementID) {
-        
         MPStaticNativeAdRendererSettings *settings = [[MPStaticNativeAdRendererSettings alloc] init];
         settings.renderingViewClass = [MoPubHiddenView class];
         

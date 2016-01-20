@@ -7,6 +7,7 @@
 //
 
 #import "MoPubNativeAdAdapter.h"
+#import "MoPubHiddenView.h"
 
 @interface MoPubNativeAdAdapter() <MPNativeAdDelegate>
 
@@ -57,7 +58,22 @@
             [nativeAssets setObject:[mpNativeAd.properties objectForKey:kAdStarRatingKey] forKey:kNativeStarRatingKey];
         }
         
-        [nativeAssets setObject:@"Sponsored" forKey:kNativeSponsoredKey];
+        [nativeAssets setObject:@"Sponsored" forKey:kNativeSponsoredByTagKey];
+        
+        UIView *nativeAdView = [_mpNativeAd retrieveAdViewWithError:nil];
+        self.mpAdView = nativeAdView;
+        self.mpAdView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        
+        for (UIView *subView in [self.mpAdView subviews]) {
+            
+            if ([subView isKindOfClass:[MoPubHiddenView class]]) {
+                MoPubHiddenView *view = (MoPubHiddenView *)subView;
+                //Setting MoPub's privacy image icon
+                if (view.privacyIconImage) {
+                    [nativeAssets setObject:view.privacyIconImage forKey:kNativeAdChoicesKey];
+                }
+            }
+        }
         
         _nativeAssets = nativeAssets;
         
@@ -75,35 +91,20 @@
 
 - (void)willAttachToView:(UIView *)view
 {
-    _anAdView = view;
+    self.anAdView = view;
     
-    UIView *nativeAdView = [_mpNativeAd retrieveAdViewWithError:nil];
-    
-    //Ad Frame would be empty if implementing single native ad and registering view
-    //without setting frame
-    if (CGRectEqualToRect(_anAdView.frame, CGRectMake(0, 0, 0, 0))) {
-        LogWarn(@"Please set the frame for your Ad UIView instance before calling `registerNativeAdWithController:forView:` for the best user experience. If you're calling `renderNativeAdWithController:defaultRenderingClass:` then set the frame in the init method of the class for the best user experience.");
+    //The first subview is the content view (be it single native ad or stream ads)
+    //Adding MoPub's ad view as the content views' subview
+    for (UIView *v in [self.anAdView subviews]) {
+        self.mpAdView.frame = v.bounds;
+        [v addSubview:self.mpAdView];
+        break;
     }
-    
-    CGRect frame = _anAdView.frame;
-    frame.origin = CGPointMake(0.0f, 0.0f);
-    nativeAdView.frame = frame;
-    
-    _mpAdView = nativeAdView;
-    
-    [view addSubview:nativeAdView];
-}
-
-- (void)trackImpression
-{
-    //Set frame if mpAdView's frame is empty
-    if (CGRectEqualToRect(_mpAdView.frame, CGRectMake(0, 0, 0, 0))) {
-        _mpAdView.frame = _anAdView.frame;
+    if ([self.anAdView subviews] == nil) {
+        self.mpAdView.frame = self.anAdView.bounds;
+        [self.anAdView addSubview:self.mpAdView];
     }
-    
-    LogDebug(@"Impression Tracked");
 }
-
 
 #pragma mark - MPNativeAdDelegate
 - (UIViewController *)viewControllerForPresentingModalView
@@ -112,6 +113,16 @@
 }
 
 - (void)willPresentModalForNativeAd:(MPNativeAd *)nativeAd
+{
+    LogDebug(@"Tracking MoPub Click");
+    if ([self.delegate respondsToSelector:@selector(nativeAdDidClick:)]) {
+        [self.delegate nativeAdDidClick:self];
+    } else {
+        LogWarn(@"Delegate does not implement click tracking callback. Clicks likely not being tracked.");
+    }
+}
+
+- (void)willLeaveApplicationFromNativeAd:(MPNativeAd *)nativeAd
 {
     LogDebug(@"Tracking MoPub Click");
     if ([self.delegate respondsToSelector:@selector(nativeAdDidClick:)]) {
