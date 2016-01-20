@@ -118,7 +118,7 @@ static NSString *const kInMobiImageURL = @"url";
             [nativeAssets setObject:[mainImageDictionary objectForKey:kInMobiImageURL] forKey:kNativeMainImageKey];
         }
         
-        [nativeAssets setObject:@"Sponsored" forKey:kNativeSponsoredKey];
+        [nativeAssets setObject:@"Sponsored" forKey:kNativeSponsoredByTagKey];
         
         _nativeAssets = nativeAssets;
         
@@ -177,7 +177,10 @@ static NSString *const kInMobiImageURL = @"url";
 {
     [self.inMobiNativeAd reportAdClick:nil];
 }
-
+- (BOOL)canOverrideClick
+{
+    return NO;
+}
 - (void)displayContentForURL:(NSURL *)URL rootViewController:(UIViewController *)controller
                   completion:(void (^)(BOOL success, NSError *error))completionBlock
 {
