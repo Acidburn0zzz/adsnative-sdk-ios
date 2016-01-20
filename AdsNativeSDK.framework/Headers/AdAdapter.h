@@ -39,7 +39,7 @@
  * When possible, you should place values in the returned dictionary such that they correspond to
  * the pre-defined keys in the AdConstants header file.
  */
-@property (nonatomic, readonly) NSDictionary *nativeAssets;
+@property (nonatomic, readonly) NSMutableDictionary *nativeAssets;
 
 /**
  * The default click-through URL for the ad.
@@ -156,5 +156,20 @@
  */
 -  (void)didDetachFromView:(UIView *)view;
 
+/**
+ * Determines whether NativeAd is a media (video) ad or not
+ *
+ * If not implemented, this will be assumed to return NO.
+ * If this returns YES, then NativeAd will load be informed 
+ * that a media view asset is to be loaded.
+ */
+- (BOOL)isMediaView;
 
+/**
+ * If it returns YES, then the publisher can implement the `nativeAdDidClick` callback and implement
+ * their own way of handling how to take the user to the landing page after the native ad 
+ * has been clicked.
+ * Defaults to NO.
+ */
+- (BOOL)canOverrideClick;
 @end

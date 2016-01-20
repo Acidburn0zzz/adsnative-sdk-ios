@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
-#define AN_SDK_VERSION              @"2.0.0"
+#define AN_SDK_VERSION              @"2.5.0"
 
 #define AN_IOS_6_0 60000
 

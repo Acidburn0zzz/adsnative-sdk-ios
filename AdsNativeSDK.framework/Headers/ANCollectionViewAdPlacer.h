@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "ANServerAdPositions.h"
 #import "ANClientAdPositions.h"
+#import "ANCollectionViewAdPlacerDelegate.h"
 
 @class ANAdRequestTargeting;
 
@@ -90,6 +91,13 @@
  * @param targeting An object containing targeting information, such as geolocation data.
  */
 - (void)loadAdsForAdUnitID:(NSString *)adUnitID targeting:(ANAdRequestTargeting *)targeting;
+
+/**
+ * The delegate of an `ANCollectionViewAdPlacer` instance may choose to 
+ * implement the `ANCollectionViewAdPlacerDelegate` protocol
+ * to get callbacks for impressions and clicks
+ */
+@property (nonatomic, weak) id<ANCollectionViewAdPlacerDelegate> delegate;
 
 @end
 

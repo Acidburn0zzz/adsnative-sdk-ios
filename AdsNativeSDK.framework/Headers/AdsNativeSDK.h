@@ -14,9 +14,6 @@ FOUNDATION_EXPORT double AdsNativeSDKVersionNumber;
 //! Project version string for AdsNativeSDK.
 FOUNDATION_EXPORT const unsigned char AdsNativeSDKVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <AdsNativeSDK/PublicHeader.h>
-
-
 #import <AdsNativeSDK/ANAdPositions.h>
 #import <AdsNativeSDK/ANClientAdPositions.h>
 #import <AdsNativeSDK/ANServerAdPositions.h>
@@ -24,11 +21,15 @@ FOUNDATION_EXPORT const unsigned char AdsNativeSDKVersionString[];
 #import <AdsNativeSDK/ANAdRequestTargeting.h>
 #import <AdsNativeSDK/ANNativeAd.h>
 #import <AdsNativeSDK/ANNativeAdDelegate.h>
+#import <AdsNativeSDK/ANNativeAdTrackerDelegate.h>
 #import <AdsNativeSDK/AdAdapter.h>
 #import <AdsNativeSDK/Logging.h>
 #import <AdsNativeSDK/AdAdapterDelegate.h>
+#import <AdsNativeSDK/ANCollectionViewAdPlacerDelegate.h>
+#import <AdsNativeSDK/ANTableViewAdPlacerDelegate.h>
 #import <AdsNativeSDK/CustomEvent.h>
 #import <AdsNativeSDK/CustomEventDelegate.h>
+#import <AdsNativeSDK/SDKConfigs.h>
 #import <AdsNativeSDK/AdErrors.h>
 #import <AdsNativeSDK/AdAssets.h>
 #import <AdsNativeSDK/URLResolver.h>
@@ -44,7 +45,7 @@ FOUNDATION_EXPORT const unsigned char AdsNativeSDKVersionString[];
 /**
  * Returns the AdsNativeSDK singleton object.
  *
- * @return The MoPub singleton object.
+ * @return The AdsNative singleton object.
  */
 + (AdsNativeSDK *)sharedInstance;
 

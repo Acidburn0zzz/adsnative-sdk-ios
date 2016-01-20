@@ -22,15 +22,23 @@
 		</data>
 		<key>Headers/ANCollectionViewAdPlacer.h</key>
 		<data>
-		bLZuFRqM1bx+KQ4ACx5zF3e9EQg=
+		qZlSbhnv5F5aiZM3/lNWAQnzw9U=
+		</data>
+		<key>Headers/ANCollectionViewAdPlacerDelegate.h</key>
+		<data>
+		NtHDXLUlG74Sdkpj/1/YwtjN7QA=
 		</data>
 		<key>Headers/ANNativeAd.h</key>
 		<data>
-		ocOgOAFPd82vKTLRGsycuB87ep0=
+		1Sou3Y/oelb5saQnShYK/1tfYiw=
 		</data>
 		<key>Headers/ANNativeAdDelegate.h</key>
 		<data>
-		mhuQ3dqtlivOO+vs7aS691QyMO4=
+		qV1HqSuQL1Emag1SFquBtTkir8k=
+		</data>
+		<key>Headers/ANNativeAdTrackerDelegate.h</key>
+		<data>
+		2xEHOhcniLc93dtWKSNXARJA8UA=
 		</data>
 		<key>Headers/ANServerAdPositions.h</key>
 		<data>
@@ -42,11 +50,15 @@
 		</data>
 		<key>Headers/ANTableViewAdPlacer.h</key>
 		<data>
-		QBltVYRC/vp1La4VDFJK/K6QAvo=
+		c8LQ87qyBYK2aPJw5dKZ1NM6qRI=
+		</data>
+		<key>Headers/ANTableViewAdPlacerDelegate.h</key>
+		<data>
+		Zr09Gog8SgzyLvf4AubhtkHLy9c=
 		</data>
 		<key>Headers/AdAdapter.h</key>
 		<data>
-		I76mvbHMnYoqX8jNARRbJnDdghU=
+		4kjOA6gsC+ygwn0JnjgPRzBPFq8=
 		</data>
 		<key>Headers/AdAdapterDelegate.h</key>
 		<data>
@@ -54,7 +66,7 @@
 		</data>
 		<key>Headers/AdAssets.h</key>
 		<data>
-		ihD87yg5+NnY01EEht+wBrq6lco=
+		I3k3co7imE+wjuIN7aFV4usd+1A=
 		</data>
 		<key>Headers/AdDestinationDisplayAgent.h</key>
 		<data>
@@ -66,11 +78,11 @@
 		</data>
 		<key>Headers/AdsNativeSDK.h</key>
 		<data>
-		TL15zvQnQC8ccqtUwVv6sw5KLko=
+		WukBn7oaSprNeawvy5ib4B/i9+U=
 		</data>
 		<key>Headers/Constants.h</key>
 		<data>
-		AMDL1BYFtZ5qBLRduNOY/JIr20k=
+		89TGmjacengsQdimP56EVXASy78=
 		</data>
 		<key>Headers/CustomEvent.h</key>
 		<data>
@@ -88,6 +100,10 @@
 		<data>
 		2F+WWreQyAtVKKciQLBZ49S0gvI=
 		</data>
+		<key>Headers/SDKConfigs.h</key>
+		<data>
+		Dx0V2KZTlvN26i0K9fjmjA3d1Gk=
+		</data>
 		<key>Headers/URLActionInfo.h</key>
 		<data>
 		iWkV5Zv4/FPBo58Ul/+fWIM20DM=
@@ -98,7 +114,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		tiuuVbSnIAi7HWlOCu2GdW2SZsY=
+		cnUo64aVJVooA//3NnorPNCWytE=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -125,15 +141,23 @@
 		</data>
 		<key>Headers/ANCollectionViewAdPlacer.h</key>
 		<data>
-		bLZuFRqM1bx+KQ4ACx5zF3e9EQg=
+		qZlSbhnv5F5aiZM3/lNWAQnzw9U=
+		</data>
+		<key>Headers/ANCollectionViewAdPlacerDelegate.h</key>
+		<data>
+		NtHDXLUlG74Sdkpj/1/YwtjN7QA=
 		</data>
 		<key>Headers/ANNativeAd.h</key>
 		<data>
-		ocOgOAFPd82vKTLRGsycuB87ep0=
+		1Sou3Y/oelb5saQnShYK/1tfYiw=
 		</data>
 		<key>Headers/ANNativeAdDelegate.h</key>
 		<data>
-		mhuQ3dqtlivOO+vs7aS691QyMO4=
+		qV1HqSuQL1Emag1SFquBtTkir8k=
+		</data>
+		<key>Headers/ANNativeAdTrackerDelegate.h</key>
+		<data>
+		2xEHOhcniLc93dtWKSNXARJA8UA=
 		</data>
 		<key>Headers/ANServerAdPositions.h</key>
 		<data>
@@ -145,11 +169,15 @@
 		</data>
 		<key>Headers/ANTableViewAdPlacer.h</key>
 		<data>
-		QBltVYRC/vp1La4VDFJK/K6QAvo=
+		c8LQ87qyBYK2aPJw5dKZ1NM6qRI=
+		</data>
+		<key>Headers/ANTableViewAdPlacerDelegate.h</key>
+		<data>
+		Zr09Gog8SgzyLvf4AubhtkHLy9c=
 		</data>
 		<key>Headers/AdAdapter.h</key>
 		<data>
-		I76mvbHMnYoqX8jNARRbJnDdghU=
+		4kjOA6gsC+ygwn0JnjgPRzBPFq8=
 		</data>
 		<key>Headers/AdAdapterDelegate.h</key>
 		<data>
@@ -157,7 +185,7 @@
 		</data>
 		<key>Headers/AdAssets.h</key>
 		<data>
-		ihD87yg5+NnY01EEht+wBrq6lco=
+		I3k3co7imE+wjuIN7aFV4usd+1A=
 		</data>
 		<key>Headers/AdDestinationDisplayAgent.h</key>
 		<data>
@@ -169,11 +197,11 @@
 		</data>
 		<key>Headers/AdsNativeSDK.h</key>
 		<data>
-		TL15zvQnQC8ccqtUwVv6sw5KLko=
+		WukBn7oaSprNeawvy5ib4B/i9+U=
 		</data>
 		<key>Headers/Constants.h</key>
 		<data>
-		AMDL1BYFtZ5qBLRduNOY/JIr20k=
+		89TGmjacengsQdimP56EVXASy78=
 		</data>
 		<key>Headers/CustomEvent.h</key>
 		<data>
@@ -190,6 +218,10 @@
 		<key>Headers/Logging.h</key>
 		<data>
 		2F+WWreQyAtVKKciQLBZ49S0gvI=
+		</data>
+		<key>Headers/SDKConfigs.h</key>
+		<data>
+		Dx0V2KZTlvN26i0K9fjmjA3d1Gk=
 		</data>
 		<key>Headers/URLActionInfo.h</key>
 		<data>

@@ -34,6 +34,12 @@
  */
 @property (nonatomic,weak) id<ANNativeAdDelegate> delegate;
 
+/*
+ * The provider name is the name of the adapter network that the native ad instance was created by.
+ * For direct adsnative ads, this value will be "adsnative", and for s2s ads, it will be "s2s".
+ */
+@property (nonatomic, strong) NSString *providerName;
+
 #pragma mark - Single Native Ad methods - start
 /** 
  *The methods to be called fo requesting a single native ad
@@ -42,8 +48,9 @@
 /**
  * Initialize the AdsNative SDK with the adUnitId received from the AdsNative UI.
  * @param adUnitId The ad ID received from the AdsNative UI
+ * @param viewController The view controller which should be used to present modal content.
  */
-- (instancetype) initWithAdUnitId:(NSString *)adUnitID;
+- (instancetype) initWithAdUnitId:(NSString *)adUnitID viewController:(UIViewController *)viewController;
 
 /**
  * Requests a native ad from the AdsNative ad server using the ad unit ID specified in `initWithAdUnitId`.
@@ -61,12 +68,11 @@
  * Creates and returns an ad view where the ad will be displayed. This method should be used specially 
  * when using dynamic layout switching.
  *
- * @param viewController The view controller which should be used to present modal content.
  * @param renderingClass The class that will be used to render ads. This class must
  * implement the `ANAdRendering` protocol and must be a subclass of `UIView`.
  * @return UIView The ad view to be added as a subview of the parent view being passed as param
  */
-- (UIView *)renderNativeAdWithController:(UIViewController *)viewController defaultRenderingClass:(Class)renderingClass;
+- (UIView *)renderNativeAdWithDefaultRenderingClass:(Class)renderingClass;
 
 /*
  * This method is called to register the to be rendered native ad for impression and click counting. 
@@ -75,10 +81,9 @@
  * The developer can get the native assets as a dictionary from the 'nativeAssets' property of this class. The keys for this dictionary
  * are specified in `AdAssets.h`
  *
- * @param viewController The view controller which should be used to present modal content.
  * @param adView The view into which the ad sub views will be loaded.
  */
-- (void)registerNativeAdWithController:(UIViewController *)viewController forView:(UIView *)adView;
+- (void)registerNativeAdForView:(UIView *)adView;
 
 #pragma mark - Single Native Ad methods - end
 
@@ -185,6 +190,21 @@
 - (void)trackMetricForURL:(NSURL *)URL;
 
 /** @name Loading Specific Ad Resources into Views */
+/**
+ * Loads a video ad, if available, into the imageView frame location. If video is is not available, it will
+ * load the ad objects main image into the imageView passed.
+ *
+ * @param view The UIView instance to load an image or video into.
+ */
+- (void)loadMediaIntoView:(UIView *)view;
+
+/**
+ * Asynchronously loads the ad object's ad choices icon into the provided image view.
+ * This may be nil.
+ *
+ * @param view A view object.
+ */
+- (void)loadAdChoicesIconIntoView:(UIView *)view;
 
 /**
  * Asynchronously loads the ad object's icon image into the provided image view.
