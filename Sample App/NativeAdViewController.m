@@ -41,6 +41,9 @@
 
 - (void)loadNativeAd
 {
+    //Removing all subviews (adView) from adViewContainer
+    [[self.adViewContainer subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
     [self.indicator startAnimating];
     [self.nativeAd loadAd];
 }
@@ -66,8 +69,6 @@
     /* You may call this instead of `renderNativeAdWithDefaultRenderingClass` if you wish to pass the ad view directly.*/
 //    [nativeAd registerNativeAdForView:adView];
     
-    //Removing all subviews (adView) from adViewContainer
-    [[self.adViewContainer subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     [self.adViewContainer addSubview:adView];
        
