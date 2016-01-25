@@ -4,6 +4,10 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Headers/ANAVFullScreenPlayerViewController.h</key>
+		<data>
+		hdwXJs49GtL1C7GzzhWgtOaXf7Y=
+		</data>
 		<key>Headers/ANAdPositions.h</key>
 		<data>
 		841X/L+6r1cGWGC4yRheGjpr5CU=
@@ -78,7 +82,11 @@
 		</data>
 		<key>Headers/AdsNativeSDK.h</key>
 		<data>
-		WukBn7oaSprNeawvy5ib4B/i9+U=
+		+kP5nPpxE6yhogcgAxPB34rBVLA=
+		</data>
+		<key>Headers/ApiAdRequest.h</key>
+		<data>
+		nWPdeXnpKXuVJujbJzlrCQXVDSk=
 		</data>
 		<key>Headers/Constants.h</key>
 		<data>
@@ -123,6 +131,10 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>Headers/ANAVFullScreenPlayerViewController.h</key>
+		<data>
+		hdwXJs49GtL1C7GzzhWgtOaXf7Y=
+		</data>
 		<key>Headers/ANAdPositions.h</key>
 		<data>
 		841X/L+6r1cGWGC4yRheGjpr5CU=
@@ -197,7 +209,11 @@
 		</data>
 		<key>Headers/AdsNativeSDK.h</key>
 		<data>
-		WukBn7oaSprNeawvy5ib4B/i9+U=
+		+kP5nPpxE6yhogcgAxPB34rBVLA=
+		</data>
+		<key>Headers/ApiAdRequest.h</key>
+		<data>
+		nWPdeXnpKXuVJujbJzlrCQXVDSk=
 		</data>
 		<key>Headers/Constants.h</key>
 		<data>
