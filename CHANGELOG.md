@@ -1,4 +1,4 @@
-## Version 2.5.0 (20th January, 2015)
+## Version 2.5.0
 
 - **Inline video support for direct sourced content as well as youtube embed links**.
 - **S2S (API) mediation support added. Currently, the networks that are supported are Smaato, MobFox and AppNext**.
