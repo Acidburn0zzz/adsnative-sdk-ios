@@ -1,3 +1,6 @@
+## Version 2.5.1
+- **Added suport for third party native video ads
+
 ## Version 2.5.0
 
 - **Inline video support for direct sourced content as well as youtube embed links**.
