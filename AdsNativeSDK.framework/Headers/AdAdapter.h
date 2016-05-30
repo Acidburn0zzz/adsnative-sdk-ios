@@ -157,19 +157,49 @@
 -  (void)didDetachFromView:(UIView *)view;
 
 /**
- * Determines whether NativeAd is a media (video) ad or not
- *
- * If not implemented, this will be assumed to return NO.
- * If this returns YES, then NativeAd will load be informed 
- * that a media view asset is to be loaded.
- */
-- (BOOL)isMediaView;
-
-/**
  * If it returns YES, then the publisher can implement the `nativeAdDidClick` callback and implement
  * their own way of handling how to take the user to the landing page after the native ad 
  * has been clicked.
  * Defaults to NO.
  */
 - (BOOL)canOverrideClick;
+
+/**
+ * Determines whether NativeAd is a media (video) ad or not
+ *
+ * If not implemented, this will be assumed to return NO.
+ * If this returns YES, then NativeAd will load be informed
+ * that a media view asset is to be loaded.
+ */
+- (BOOL)isMediaView;
+
+/** The `isMediaView` method must be implemented and returned with "Yes" for the following methods and properties to come into effect. **/
+
+/**
+ * Some 3rd party SDK networks do not handle visibility tracking for the media view that they provide. 
+ * If this method returns YES, the AdsNative SDK will handle visibility tracking on the media view.
+ *
+ * Defaults to NO
+ */
+- (BOOL)handleMediaViewVisibility;
+
+/*
+ * The percentage of the media view that should be visible before `mediaDidComeIntoView` of
+ * `mediaDidGoOutOfView` is called.
+ * Defaults to 50.0
+ */
+@property (nonatomic, readonly) float mediaViewVisibilityPercent;
+
+/**
+ * Called when the media view comes into view. The media view can come into view if it is scrolled 
+ * into view or if the app comes to foreground and the media view is visibile.
+ */
+- (void)mediaDidComeIntoView;
+
+/**
+ * Called when the media view goes out of view. The media view can go out of view if it is scrolled 
+ * out of view or if the app goes into the background.
+ */
+- (void)mediaDidGoOutOfView;
+
 @end

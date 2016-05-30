@@ -1,3 +1,6 @@
+# Version 2.5.2
+- **Fixed a bug that resulted in intermitten crash during the SDK configuration call**.
+
 ## Version 2.5.1
 - **Added suport for third party native video ads
 
