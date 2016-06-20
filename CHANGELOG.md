@@ -1,3 +1,6 @@
+# Version 2.5.3
+- **Performance Improvements**.
+
 # Version 2.5.2
 - **Fixed a bug that resulted in intermitten crash during the SDK configuration call**.
 
