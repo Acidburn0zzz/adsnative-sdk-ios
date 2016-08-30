@@ -24,6 +24,7 @@ static const NSInteger FacebookNoFillErrorCode = 1001;
     NSString *placementID = [info objectForKey:@"placementId"];
     
     if (placementID) {
+        [FBAdSettings setMediationService:@"adsnative"];
         _fbNativeAd = [[FBNativeAd alloc] initWithPlacementID:placementID];
         self.fbNativeAd.delegate = self;
         [self.fbNativeAd loadAd];

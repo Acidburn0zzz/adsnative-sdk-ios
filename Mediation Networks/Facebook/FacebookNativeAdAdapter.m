@@ -26,20 +26,21 @@
         _fbNativeAd = fbNativeAd;
         _fbNativeAd.delegate = self;
         
-        NSNumber *starRating = nil;
+        //Star rating is deprecated. Commenting for now.
+//        NSNumber *starRating = nil;
         
         // Normalize star rating to 5 stars.
-        if (fbNativeAd.starRating.scale != 0) {
-            CGFloat ratio = 0.0f;
-            ratio = kStarRatingUniversalScale/fbNativeAd.starRating.scale;
-            starRating = [NSNumber numberWithFloat:ratio*fbNativeAd.starRating.value];
-        }
+//        if (fbNativeAd.starRating.scale != 0) {
+//            CGFloat ratio = 0.0f;
+//            ratio = kStarRatingUniversalScale/fbNativeAd.starRating.scale;
+//            starRating = [NSNumber numberWithFloat:ratio*fbNativeAd.starRating.value];
+//        }
         
         NSMutableDictionary *nativeAssets = [NSMutableDictionary dictionary];
         
-        if (starRating) {
-            [nativeAssets setObject:starRating forKey:kNativeStarRatingKey];
-        }
+//        if (starRating) {
+//            [nativeAssets setObject:starRating forKey:kNativeStarRatingKey];
+//        }
         
         if (fbNativeAd.title) {
             [nativeAssets setObject:fbNativeAd.title forKey:kNativeTitleKey];
