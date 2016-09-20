@@ -1,13 +1,17 @@
-# Version 2.5.3
+## Version 2.6.0
+- **iOS 10 support**
+- **Bug fix for single native ad callback not fired during scroll"
+
+## Version 2.5.3
 - **Performance Improvements**.
 
-# Version 2.5.2
+## Version 2.5.2
 - **Fixed a bug that resulted in intermitten crash during the SDK configuration call**.
 
 ## Version 2.5.1
 - **Added suport for third party native video ads
 
-## Version 2.5.0
+## Version 2.5.0 (20th January, 2015)
 
 - **Inline video support for direct sourced content as well as youtube embed links**.
 - **S2S (API) mediation support added. Currently, the networks that are supported are Smaato, MobFox and AppNext**.
