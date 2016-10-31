@@ -70,9 +70,10 @@
  *
  * @param renderingClass The class that will be used to render ads. This class must
  * implement the `ANAdRendering` protocol and must be a subclass of `UIView`.
+ * @param the CGRect bounds that this view should render into. May be nil.
  * @return UIView The ad view to be added as a subview of the parent view being passed as param
  */
-- (UIView *)renderNativeAdWithDefaultRenderingClass:(Class)renderingClass;
+- (UIView *)renderNativeAdWithDefaultRenderingClass:(Class)renderingClass withBounds:(CGRect)bounds;
 
 /*
  * This method is called to register the to be rendered native ad for impression and click counting. 

@@ -62,9 +62,7 @@
     self.nativeAd = nativeAd;
     
     //Use this for dynamic layout switching. Make sure your UIView class implements `ANAdRendering` protocol
-    UIView *adView =[nativeAd renderNativeAdWithDefaultRenderingClass:[NativeAdView class]];
-    
-    adView.frame = self.adViewContainer.bounds;
+    UIView *adView =[nativeAd renderNativeAdWithDefaultRenderingClass:[NativeAdView class] withBounds:self.adViewContainer.bounds];
     
     /* You may call this instead of `renderNativeAdWithDefaultRenderingClass` if you wish to pass the ad view directly.*/
 //    [nativeAd registerNativeAdForView:adView];

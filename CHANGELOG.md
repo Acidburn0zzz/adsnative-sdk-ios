@@ -1,6 +1,9 @@
+## Version 2.6.1
+- **Accept bounds as a param during single native ad rendering**
+
 ## Version 2.6.0
 - **iOS 10 support**
-- **Bug fix for single native ad callback not fired during scroll"
+- **Bug fix for single native ad callback not fired during scroll**
 
 ## Version 2.5.3
 - **Performance Improvements**.
