@@ -3,7 +3,7 @@
 
 ## Version 2.6.0
 - **iOS 10 support**
-- **Bug fix for single native ad callback not fired during scroll**
+- **Bug fix for single native ad callback not fired while scrolling**
 
 ## Version 2.5.3
 - **Performance Improvements**.
