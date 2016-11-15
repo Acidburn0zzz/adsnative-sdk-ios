@@ -1,3 +1,6 @@
+## Version 2.6.2
+- **Performance improvements**
+
 ## Version 2.6.1
 - **Accept bounds as a param during single native ad rendering**
 
