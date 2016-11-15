@@ -35,7 +35,6 @@ FOUNDATION_EXPORT const unsigned char AdsNativeSDKVersionString[];
 #import <AdsNativeSDK/URLResolver.h>
 #import <AdsNativeSDK/URLActionInfo.h>
 #import <AdsNativeSDK/ANAVFullScreenPlayerViewController.h>
-#import <AdsNativeSDK/ApiAdRequest.h>
 #import <AdsNativeSDK/AdDestinationDisplayAgent.h>
 #import <AdsNativeSDK/InstanceProvider.h>
 #import <AdsNativeSDK/Constants.h>
