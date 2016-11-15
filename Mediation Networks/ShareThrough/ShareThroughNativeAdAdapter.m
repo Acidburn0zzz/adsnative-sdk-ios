@@ -7,7 +7,6 @@
 
 #import "ShareThroughNativeAdAdapter.h"
 #import "STRAdHiddenView.h"
-#import <AdsNativeSDK/AdsNativeSDK.h>
 #import <SharethroughSDK/STRAdvertisementDelegate.h>
 
 @interface ShareThroughNativeAdAdapter () <STRAdViewDelegate, STRAdvertisementDelegate>
@@ -36,35 +35,38 @@
         self.sdk = sdk;
         self.placementId = placementId;
         
-        self.strAdView = [[STRAdHiddenView alloc] init];
-        
-        NSMutableDictionary *nativeAssets = [NSMutableDictionary dictionary];
-        
-        if (strNativeAd.title != nil) {
-            [nativeAssets setObject:strNativeAd.title forKey:kNativeTitleKey];
-        }
-        if (strNativeAd.adDescription != nil) {
-            [nativeAssets setObject:strNativeAd.adDescription forKey:kNativeTextKey];
-        }
-        if ([strNativeAd.thumbnailURL absoluteString] != nil) {
-            [nativeAssets setObject:[strNativeAd.thumbnailURL absoluteString] forKey:kNativeMainImageKey];
-        }
-        if ([strNativeAd.brandLogoURL absoluteString] != nil) {
-            [nativeAssets setObject:[strNativeAd.brandLogoURL absoluteString] forKey:kNativeIconImageKey];
-        }
-        if (strNativeAd.advertiser != nil) {
-            [nativeAssets setObject:strNativeAd.advertiser forKey:kNativeSponsoredKey];
-        }
-        
-        //setting the disclosure button temporarily. It will be filled later
-        [nativeAssets setObject:self.strAdView.disclosureButton forKey:kNativeAdChoicesKey];
-        
-        _nativeAssets = nativeAssets;
+        [self populateNativeAssetsUsingStrAd:strNativeAd];
         
         self.strNativeAd = strNativeAd;
         self.strNativeAd.delegate = self;
     }
     return self;
+}
+
+- (void)populateNativeAssetsUsingStrAd:(STRAdvertisement *)strNativeAd {
+    NSMutableDictionary *nativeAssets = [NSMutableDictionary dictionary];
+    
+    if (strNativeAd.title != nil) {
+        [nativeAssets setObject:strNativeAd.title forKey:kNativeTitleKey];
+    }
+    if (strNativeAd.adDescription != nil) {
+        [nativeAssets setObject:strNativeAd.adDescription forKey:kNativeTextKey];
+    }
+    if (strNativeAd.thumbnailImage != nil) {
+        [nativeAssets setObject:strNativeAd.thumbnailImage forKey:kNativeMainImageKey];
+        
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:strNativeAd.thumbnailImage];
+        [strNativeAd setThumbnailImageInView:imageView];
+        [nativeAssets setObject:imageView forKey:kNativeMediaViewKey];
+    }
+    if (strNativeAd.brandLogoImage != nil) {
+        [nativeAssets setObject:strNativeAd.brandLogoImage forKey:kNativeIconImageKey];
+    }
+    if (strNativeAd.advertiser != nil) {
+        [nativeAssets setObject:strNativeAd.advertiser forKey:kNativeSponsoredKey];
+    }
+    
+    _nativeAssets = nativeAssets;
 }
 
 #pragma mark - AdAdapter
@@ -96,8 +98,10 @@
 - (void)willAttachToView:(UIView *)view
 {
     self.adView = view;
-    //This call will never fail as ad has already been prefetched
-    [self.sdk placeAdInView:self.strAdView placementKey:self.placementId presentingViewController:[self.delegate viewControllerToPresentModalView] index:0 delegate:self];
+    
+    //Placing prefetched ad into view
+    self.strAdView = [[STRAdHiddenView alloc] init];
+    [self.sdk placeAdInView:self.strAdView placementKey:self.placementId presentingViewController:[self.delegate viewControllerToPresentModalView] index:0 customProperties:nil delegate:self];
 }
 
 #pragma mark - STRAdvertisementDelegate
@@ -126,23 +130,30 @@
 #pragma mark - STRAdViewDelegate
 - (void)adView:(id<STRAdView>)adView didFetchAd:(STRAdvertisement*)ad ForPlacementKey:(NSString *)placementKey atIndex:(NSInteger)adIndex
 {
+    [self populateNativeAssetsUsingStrAd:ad];
+    //setting the disclosure button now that ad is placed in view
+    [_nativeAssets setObject:self.strAdView.disclosureButton forKey:kNativeAdChoicesKey];
+    
     self.strNativeAd = ad;
     self.strNativeAd.delegate = self;
     
     self.strAdView = (STRAdHiddenView *)adView;
     self.strAdView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
-    //The first subview is the content view (be it single native ad or stream ads)
-    //Adding ShareThrough's ad view as the content views' subview
-    for (UIView *v in [self.adView subviews]) {
-        self.strAdView.frame = v.bounds;
-        [v addSubview:self.strAdView];
-        break;
-    }
     if ([self.adView subviews] == nil) {
         self.strAdView.frame = self.adView.bounds;
         [self.adView addSubview:self.strAdView];
+        return;
     }
-    
+    //The first subview is the content view (be it single native ad or stream ads)
+    //Adding ShareThrough's ad view as the content views' subview
+    UIView *subView = [[self.adView subviews] firstObject];
+    self.strAdView.frame = subView.bounds;
+    [subView addSubview:self.strAdView];
+}
+
+//Should never get called since ad's been prefetched
+- (void)adView:(id<STRAdView>)adView didFailToFetchAdForPlacementKey:(NSString *)placementKey atIndex:(NSInteger)adIndex {
+    return;
 }
 @end

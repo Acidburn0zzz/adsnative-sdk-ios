@@ -7,8 +7,8 @@
 
 #import <Foundation/Foundation.h>
 #import <SharethroughSDK/SharethroughSDK.h>
+#import "STRAdHiddenView.h"
 #import <AdsNativeSDK/AdsNativeSDK.h>
-
 
 @interface ShareThroughNativeAdAdapter : NSObject  <AdAdapter>
 

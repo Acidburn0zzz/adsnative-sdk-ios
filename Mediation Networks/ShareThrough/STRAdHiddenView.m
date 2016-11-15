@@ -18,6 +18,7 @@
         self.strAdSponsoredText = [[UILabel alloc] init];
         self.strAdDescription = [[UILabel alloc] init];
         self.strAdMainImage = [[UIImageView alloc] init];
+        self.strAdMainImage.userInteractionEnabled = YES;
         self.strAdIconImage = [[UIImageView alloc] init];
         self.strAdDisclosureButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         self.strAdDisclosureButton.userInteractionEnabled = YES;
