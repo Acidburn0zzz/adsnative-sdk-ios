@@ -1,3 +1,6 @@
+## Version 2.6.3
+- **Switch to secure https calls only**
+
 ## Version 2.6.2
 - **Performance improvements**
 
