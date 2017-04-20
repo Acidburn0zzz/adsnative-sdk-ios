@@ -1,3 +1,6 @@
+## Version 2.7.0
+-- **Pass custom actions, if defined, to the ad object**
+
 ## Version 2.6.3
 - **Switch to secure https calls only**
 
