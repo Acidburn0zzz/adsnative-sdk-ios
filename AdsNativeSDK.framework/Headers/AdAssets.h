@@ -54,3 +54,6 @@ extern const NSString *kNativeVideoPlayTrackerKey;
 extern const NSString *kNativeImpressionsKey;
 extern const NSString *kNativeClicksKey;
 extern const NSString *kNativeLandingUrlKey;
+
+//May be nil. This returns a dictionary of publisher defined custom actions.
+extern const NSString *kNativeCustomActionsKey;
