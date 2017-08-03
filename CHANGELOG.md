@@ -1,3 +1,6 @@
+## Version 2.8.0
+-- **Add support for header bidding**
+
 ## Version 2.7.0
 -- **Pass custom actions, if defined, to the ad object**
 
