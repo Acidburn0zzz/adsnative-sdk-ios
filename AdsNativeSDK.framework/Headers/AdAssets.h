@@ -37,6 +37,7 @@ extern const NSString *kNativeBackUpRequiredKey;
 extern const NSString *kNativeSDKConfigsKey;
 
 extern const NSString *kNativeAdTypeKey;
+extern const NSString *kNativeEcpmKey;
 
 //Media View Assets
 //May be nil if not a media ad

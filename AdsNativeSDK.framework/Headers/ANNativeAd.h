@@ -101,6 +101,12 @@
 @property (nonatomic, readonly) NSURL *clickThroughURL;
 
 /**
+ * The bidding ecpm rounded to the nearest decimal decided by the bidding interval.
+ * The bidding interval default is 0.01 and can be modified on the server at an adunit level.
+ * returns -1 if no ecpm is returned in the ad response
+ */
+@property (nonatomic, readonly) float biddingEcpm;
+/**
  * Star rating for the ad.
  *
  * This is a float value between 0 and 5.

@@ -14,6 +14,7 @@ extern const NSString *kDefaultPlayButtonImageURL;
 extern const NSString *kDefaultCloseButtonImageURL;
 extern const NSString *kDefaultExpandButtonImageURL;
 extern const float kDefaultPercentVisibleForAutoplay;
+extern const float kDefaultBiddingInterval;
 
 @interface SDKConfigs : NSObject
 
@@ -23,6 +24,7 @@ extern const float kDefaultPercentVisibleForAutoplay;
 @property NSString *closeButtonImageURL;
 @property NSString *expandButtonImageURL;
 @property (nonatomic) float percentVisibleForAutoplay;
+@property (nonatomic) float biddingInterval;
 
 + (instancetype)populateWithDefaults;
 - (void)populateWithDefaultVideoAssets;
