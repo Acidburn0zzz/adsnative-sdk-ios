@@ -11,9 +11,26 @@
 
 #import <AdsNativeSDK/AdsNativeSDK.h>
 
-@interface NativeAdViewController () <ANNativeAdDelegate>
+#import "PMBidder.h"
+
+#import "MPNativeAdRequest.h"
+#import "MPNativeAd.h"
+#import "MPNativeAdRenderer.h"
+#import "MPNativeAdRendererConfiguration.h"
+#import "MoPubNativeAdView.h"
+#import "MPStaticNativeAdRendererSettings.h"
+#import "MPStaticNativeAdRenderer.h"
+#import "MPNativeAdDelegate.h"
+#import "MPLogging.h"
+
+@interface NativeAdViewController () <MPNativeAdDelegate>
 
 @property (nonatomic, strong) ANNativeAd *nativeAd;
+
+@property (nonatomic, strong) MPNativeAd *mpNativeAd;
+@property (nonatomic, strong) MPNativeAdRequest *mpNativeAdRequest;
+
+@property (nonatomic, strong) PMBidder *bidder;
 
 @end
 
@@ -27,11 +44,21 @@
     [_loadTableViewButton addTarget:self action:@selector(loadTableViewAds) forControlEvents:UIControlEventTouchUpInside];
     [_loadNativeAdButton addTarget:self action:@selector(loadNativeAd) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.indicator startAnimating];
+    [self.indicator stopAnimating];
+    /****** MoPub code for ad call ******/
+    MPStaticNativeAdRendererSettings *settings = [[MPStaticNativeAdRendererSettings alloc] init];
+    settings.renderingViewClass = [MoPubNativeAdView class];
     
-    self.nativeAd = [[ANNativeAd alloc] initWithAdUnitId:@"_WSCwPg4czQD8NRuCC0v9qVObfyDj7FnQoZPW0uF" viewController:self];
-    self.nativeAd.delegate = self;
-    [self.nativeAd loadAd];
+    
+    MPNativeAdRendererConfiguration *config = [MPStaticNativeAdRenderer rendererConfigurationWithRendererSettings:settings];
+    NSMutableArray *supportedCustomEvents = [[NSMutableArray alloc] initWithArray:config.supportedCustomEvents];
+    [supportedCustomEvents addObject:@"PolymorphNativeCustomEvent"];
+    //List of supported networks that mopub can render into
+    config.supportedCustomEvents = supportedCustomEvents;
+    
+    self.mpNativeAdRequest = [MPNativeAdRequest requestWithAdUnitIdentifier:@"918839774b5e495885d47bb08d0a8758" rendererConfigurations:@[config]];
+    
+    self.bidder = [[PMBidder alloc] initWithPMAdUnitID:@"ping"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,7 +72,19 @@
     [[self.adViewContainer subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     [self.indicator startAnimating];
-    [self.nativeAd loadAd];
+    
+    [self.bidder startWithAdRequest:self.mpNativeAdRequest viewController:self  completionHandler:^(MPNativeAdRequest *request, MPNativeAd *response, NSError *error) {
+        [self.indicator stopAnimating];
+        if (error) {
+            // Handle error.
+        } else {
+            self.mpNativeAd = response;
+            self.mpNativeAd.delegate = self;
+            UIView *nativeAdView = [response retrieveAdViewWithError:nil];
+            nativeAdView.frame = self.adViewContainer.bounds;
+            [self.adViewContainer addSubview:nativeAdView];
+        }
+    }];
 }
 
 - (void)loadTableViewAds
@@ -54,56 +93,10 @@
     [self presentViewController:tableViewController animated:YES completion:nil];
 }
 
-#pragma mark - <ANNativeAdDelegate>
-- (void)anNativeAdDidLoad:(ANNativeAd *)nativeAd {
-    [self.indicator stopAnimating];
-    
-    //have a strong retain of the native ad instance
-    self.nativeAd = nativeAd;
-    
-    //Use this for dynamic layout switching. Make sure your UIView class implements `ANAdRendering` protocol
-    UIView *adView =[nativeAd renderNativeAdWithDefaultRenderingClass:[NativeAdView class] withBounds:self.adViewContainer.bounds];
-    
-    /* You may call this instead of `renderNativeAdWithDefaultRenderingClass` if you wish to pass the ad view directly.*/
-//    [nativeAd registerNativeAdForView:adView];
-    
-    
-    [self.adViewContainer addSubview:adView];
-       
-}
 
-- (void)anNativeAd:(ANNativeAd *)nativeAd didFailWithError:(NSError *)error {
-    NSLog(@"Native ad request failed with error:%@",error);
-    [self.indicator stopAnimating];
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Native ad failed to load"
-                                                    message:@"Check console for more details"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    
-    [alert show];
-}
-
-- (void)anNativeAdDidRecordImpression
+#pragma mark - <MPNativeAdDelegate>
+- (UIViewController *)viewControllerForPresentingModalView
 {
-    NSLog(@"Native Ad Impression Recorded");
+    return self;
 }
-
-- (BOOL)anNativeAdDidClick:(ANNativeAd *)nativeAd
-{
-    NSLog(@"Native Ad Did Click");
-//    NSString *landingUrl = [nativeAd.nativeAssets objectForKey:kNativeLandingUrlKey];
-//    NSLog(@"Landing url:%@",landingUrl);
-//    if ([nativeAd.providerName isEqualToString:@"adsnative"]) {
-//
-//        /** Handle Click **/
-//        return YES;
-//    } else {
-//        return NO;
-//    }
-    
-    return NO;
-}
-
 @end
