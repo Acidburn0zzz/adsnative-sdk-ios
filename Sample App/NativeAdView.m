@@ -11,7 +11,7 @@
 
 @implementation NativeAdView
 
-- (void)layoutAdAssets:(ANNativeAd *)adObject
+- (void)layoutAdAssets:(PMNativeAd *)adObject
 {
     [adObject loadTitleIntoLabel:self.adtitle];
     [adObject loadTextIntoLabel:self.summary];

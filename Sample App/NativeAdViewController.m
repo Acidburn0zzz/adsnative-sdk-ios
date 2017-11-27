@@ -11,9 +11,11 @@
 
 #import <AdsNativeSDK/AdsNativeSDK.h>
 
-@interface NativeAdViewController () <ANNativeAdDelegate>
+@interface NativeAdViewController () <PMClassDelegate>
 
-@property (nonatomic, strong) ANNativeAd *nativeAd;
+@property (nonatomic, strong) PMClass *pmClass;
+@property (nonatomic, strong) PMNativeAd *nativeAd;
+@property (nonatomic, strong) PMBannerView *pmBannerView;
 
 @end
 
@@ -25,13 +27,20 @@
     // Do any additional setup after loading the view from its nib.
     
     [_loadTableViewButton addTarget:self action:@selector(loadTableViewAds) forControlEvents:UIControlEventTouchUpInside];
-    [_loadNativeAdButton addTarget:self action:@selector(loadNativeAd) forControlEvents:UIControlEventTouchUpInside];
+    [_loadAdButton addTarget:self action:@selector(loadAd) forControlEvents:UIControlEventTouchUpInside];
     
     [self.indicator startAnimating];
     
-    self.nativeAd = [[ANNativeAd alloc] initWithAdUnitId:@"_WSCwPg4czQD8NRuCC0v9qVObfyDj7FnQoZPW0uF" viewController:self];
-    self.nativeAd.delegate = self;
-    [self.nativeAd loadAd];
+    /****** Polymorph code for ad call ******/
+    LogSetLevel(LogLevelDebug);
+    self.pmClass = [[PMClass alloc] initWithAdUnitID:@"ping" requestType:PM_REQUEST_TYPE_NATIVE withBannerSize:CGSizeMake(0, 0)];
+    
+    //For banner requests
+//    self.pmClass  = [[PMClass alloc] initWithAdUnitID:@"pUW7n6VJQesm68GmdYyDA4IZhNzjm8CC3KrDVzLU" requestType:PM_REQUEST_TYPE_BANNER withBannerSize:self.adViewContainer.bounds.size];
+
+    self.pmClass.delegate = self;
+    
+    [self.indicator stopAnimating];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,13 +48,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)loadNativeAd
+- (void)loadAd
 {
     //Removing all subviews (adView) from adViewContainer
     [[self.adViewContainer subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     [self.indicator startAnimating];
-    [self.nativeAd loadAd];
+    [self.pmClass loadPMAd];
 }
 
 - (void)loadTableViewAds
@@ -54,8 +63,8 @@
     [self presentViewController:tableViewController animated:YES completion:nil];
 }
 
-#pragma mark - <ANNativeAdDelegate>
-- (void)anNativeAdDidLoad:(ANNativeAd *)nativeAd {
+#pragma mark - <PMClassDelegate>
+- (void)pmNativeAdDidLoad:(PMNativeAd *)nativeAd {
     [self.indicator stopAnimating];
     
     //have a strong retain of the native ad instance
@@ -72,7 +81,7 @@
        
 }
 
-- (void)anNativeAd:(ANNativeAd *)nativeAd didFailWithError:(NSError *)error {
+- (void)pmNativeAd:(PMNativeAd *)nativeAd didFailWithError:(NSError *)error {
     NSLog(@"Native ad request failed with error:%@",error);
     [self.indicator stopAnimating];
     
@@ -85,12 +94,12 @@
     [alert show];
 }
 
-- (void)anNativeAdDidRecordImpression
+- (void)pmNativeAdDidRecordImpression
 {
     NSLog(@"Native Ad Impression Recorded");
 }
 
-- (BOOL)anNativeAdDidClick:(ANNativeAd *)nativeAd
+- (BOOL)pmNativeAdDidClick:(PMNativeAd *)nativeAd
 {
     NSLog(@"Native Ad Did Click");
 //    NSString *landingUrl = [nativeAd.nativeAssets objectForKey:kNativeLandingUrlKey];
@@ -106,4 +115,21 @@
     return NO;
 }
 
+- (void)pmBannerAdDidLoad:(PMBannerView *)adView
+{
+    [self.indicator stopAnimating];
+    [self.adViewContainer addSubview:adView];
+    NSLog(@"Banner loaded");
+}
+
+- (void)pmBannerAdDidFailToLoad:(PMBannerView *)view withError:(NSError *)error
+{
+    [self.indicator stopAnimating];
+    NSLog(@"Banner failed to load %@", error);
+}
+
+- (UIViewController *)pmViewControllerForPresentingModalView
+{
+    return self;
+}
 @end

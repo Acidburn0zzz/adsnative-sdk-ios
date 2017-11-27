@@ -23,6 +23,7 @@
 		5CBE8AB31BA96D95000DBCFE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CBE8AB21BA96D95000DBCFE /* Images.xcassets */; };
 		5CBE8AB61BA96D95000DBCFE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CBE8AB41BA96D95000DBCFE /* LaunchScreen.xib */; };
 		5CBE8AC21BA96D95000DBCFE /* AdsNative_iOS_SDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBE8AC11BA96D95000DBCFE /* AdsNative_iOS_SDKTests.m */; };
+		5CD183681FCC21E40077E5E2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CD183671FCC21E40077E5E2 /* WebKit.framework */; };
 		5CDEEFBA1BC6EB5200C315D5 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CDEEFB91BC6EB5200C315D5 /* AdSupport.framework */; };
 		5CDEF0111BC78C5E00C315D5 /* angry_birds_cake.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5CDEF0011BC78C5E00C315D5 /* angry_birds_cake.jpg */; };
 		5CDEF0121BC78C5E00C315D5 /* creme_brelee.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5CDEF0021BC78C5E00C315D5 /* creme_brelee.jpg */; };
@@ -42,9 +43,6 @@
 		5CDEF0201BC78C5E00C315D5 /* white_chocolate_donut.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5CDEF0101BC78C5E00C315D5 /* white_chocolate_donut.jpg */; };
 		5CDEF0271BC7C8A200C315D5 /* ANAdTableViewCellNew.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDEF0251BC7C8A200C315D5 /* ANAdTableViewCellNew.m */; };
 		5CDEF0281BC7C8A200C315D5 /* ANAdTableViewCellNew.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CDEF0261BC7C8A200C315D5 /* ANAdTableViewCellNew.xib */; };
-		5CF68EC91D951F9E0015D169 /* FacebookNativeAdAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CF68EC61D951F9E0015D169 /* FacebookNativeAdAdapter.m */; };
-		5CF68ECA1D951F9E0015D169 /* FacebookNativeCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CF68EC81D951F9E0015D169 /* FacebookNativeCustomEvent.m */; };
-		5CF68ECC1D951FB90015D169 /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CF68ECB1D951FB90015D169 /* FBAudienceNetwork.framework */; };
 		5CFD38671C4F472C007F5C08 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CFD38661C4F472C007F5C08 /* MediaPlayer.framework */; };
 		5CFD38691C4F4731007F5C08 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CFD38681C4F4731007F5C08 /* AVKit.framework */; };
 		5CFD38711C4FA28A007F5C08 /* AdsNativeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CFD38701C4FA28A007F5C08 /* AdsNativeSDK.framework */; };
@@ -88,6 +86,7 @@
 		5CBE8ABB1BA96D95000DBCFE /* Sample App.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sample App.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CBE8AC01BA96D95000DBCFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CBE8AC11BA96D95000DBCFE /* AdsNative_iOS_SDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdsNative_iOS_SDKTests.m; sourceTree = "<group>"; };
+		5CD183671FCC21E40077E5E2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		5CDEEFB91BC6EB5200C315D5 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		5CDEEFBB1BC6EB6700C315D5 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		5CDEF0011BC78C5E00C315D5 /* angry_birds_cake.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = angry_birds_cake.jpg; path = images/angry_birds_cake.jpg; sourceTree = "<group>"; };
@@ -109,11 +108,6 @@
 		5CDEF0241BC7C8A200C315D5 /* ANAdTableViewCellNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANAdTableViewCellNew.h; sourceTree = "<group>"; };
 		5CDEF0251BC7C8A200C315D5 /* ANAdTableViewCellNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANAdTableViewCellNew.m; sourceTree = "<group>"; };
 		5CDEF0261BC7C8A200C315D5 /* ANAdTableViewCellNew.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANAdTableViewCellNew.xib; sourceTree = "<group>"; };
-		5CF68EC51D951F9E0015D169 /* FacebookNativeAdAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookNativeAdAdapter.h; sourceTree = "<group>"; };
-		5CF68EC61D951F9E0015D169 /* FacebookNativeAdAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookNativeAdAdapter.m; sourceTree = "<group>"; };
-		5CF68EC71D951F9E0015D169 /* FacebookNativeCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookNativeCustomEvent.h; sourceTree = "<group>"; };
-		5CF68EC81D951F9E0015D169 /* FacebookNativeCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookNativeCustomEvent.m; sourceTree = "<group>"; };
-		5CF68ECB1D951FB90015D169 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
 		5CFD38661C4F472C007F5C08 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		5CFD38681C4F4731007F5C08 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		5CFD38701C4FA28A007F5C08 /* AdsNativeSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AdsNativeSDK.framework; sourceTree = "<group>"; };
@@ -124,10 +118,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CD183681FCC21E40077E5E2 /* WebKit.framework in Frameworks */,
 				5CFD38691C4F4731007F5C08 /* AVKit.framework in Frameworks */,
 				5CFD38671C4F472C007F5C08 /* MediaPlayer.framework in Frameworks */,
 				5CDEEFBA1BC6EB5200C315D5 /* AdSupport.framework in Frameworks */,
-				5CF68ECC1D951FB90015D169 /* FBAudienceNetwork.framework in Frameworks */,
 				5CFD38711C4FA28A007F5C08 /* AdsNativeSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -168,7 +162,7 @@
 		5C01DC161BC67E7600491F9B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5CF68ECB1D951FB90015D169 /* FBAudienceNetwork.framework */,
+				5CD183671FCC21E40077E5E2 /* WebKit.framework */,
 				5CFD38701C4FA28A007F5C08 /* AdsNativeSDK.framework */,
 				5CFD38681C4F4731007F5C08 /* AVKit.framework */,
 				5CFD38661C4F472C007F5C08 /* MediaPlayer.framework */,
@@ -182,7 +176,6 @@
 		5CBE8A991BA96D95000DBCFE = {
 			isa = PBXGroup;
 			children = (
-				5CF68EC41D951F9E0015D169 /* Facebook */,
 				5CBE8AA41BA96D95000DBCFE /* Sample App */,
 				5CBE8ABE1BA96D95000DBCFE /* Sample AppTests */,
 				5CBE8AA31BA96D95000DBCFE /* Products */,
@@ -255,18 +248,6 @@
 				5CBE8AC01BA96D95000DBCFE /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		5CF68EC41D951F9E0015D169 /* Facebook */ = {
-			isa = PBXGroup;
-			children = (
-				5CF68EC51D951F9E0015D169 /* FacebookNativeAdAdapter.h */,
-				5CF68EC61D951F9E0015D169 /* FacebookNativeAdAdapter.m */,
-				5CF68EC71D951F9E0015D169 /* FacebookNativeCustomEvent.h */,
-				5CF68EC81D951F9E0015D169 /* FacebookNativeCustomEvent.m */,
-			);
-			name = Facebook;
-			path = "Mediation Networks/Facebook";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -396,12 +377,10 @@
 			files = (
 				5CBE8AAE1BA96D95000DBCFE /* TableViewController.m in Sources */,
 				5C01DBA41BC3044A00491F9B /* ANAdTableViewCell.m in Sources */,
-				5CF68ECA1D951F9E0015D169 /* FacebookNativeCustomEvent.m in Sources */,
 				5CBE8AAB1BA96D95000DBCFE /* AppDelegate.m in Sources */,
 				5C25A4C71BD0F7060025A3B3 /* NativeAdView.m in Sources */,
 				5CDEF0271BC7C8A200C315D5 /* ANAdTableViewCellNew.m in Sources */,
 				5CBE8AA81BA96D95000DBCFE /* main.m in Sources */,
-				5CF68EC91D951F9E0015D169 /* FacebookNativeAdAdapter.m in Sources */,
 				5C01DBA01BC2FCE100491F9B /* SimpleTableViewCell.m in Sources */,
 				5C25A4C31BCD7F7B0025A3B3 /* NativeAdViewController.m in Sources */,
 			);

@@ -49,7 +49,7 @@ static NSString *const simpleTableIdentifier = @"SimpleTableCell";
     self.placer = [ANTableViewAdPlacer placerWithTableView:self.tableView viewController:self adPositions:serverAdPositions defaultAdRenderingClass:[ANAdTableViewCell class]];
     self.placer.delegate = self;
     
-    [self.placer loadAdsForAdUnitID:@"_WSCwPg4czQD8NRuCC0v9qVObfyDj7FnQoZPW0uF"];
+    [self.placer loadAdsForAdUnitID:@"ping"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -95,7 +95,7 @@ static NSString *const simpleTableIdentifier = @"SimpleTableCell";
     NSLog(@"Inside TableView Recorded Impression");
 }
 
-- (BOOL)anNativeAdDidClick:(ANNativeAd *)nativeAd
+- (BOOL)anNativeAdDidClick:(PMNativeAd *)nativeAd
 {
     NSLog(@"Inside TableView Recorded Click");
     return NO;

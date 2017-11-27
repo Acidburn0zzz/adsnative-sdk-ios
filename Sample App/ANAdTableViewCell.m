@@ -20,7 +20,7 @@
     // Configure the view for the selected state
 }
 
-- (void)layoutAdAssets:(ANNativeAd *)adObject
+- (void)layoutAdAssets:(PMNativeAd *)adObject
 {
     [adObject loadTitleIntoLabel:self.titleLabel];
     [adObject loadTextIntoLabel:self.mainTextLabel];
