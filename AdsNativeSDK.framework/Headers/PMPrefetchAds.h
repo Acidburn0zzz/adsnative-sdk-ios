@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ANNativeAd.h"
+#import "PMNativeAd.h"
 
 @interface PMPrefetchAds : NSObject
 
 + (instancetype)getInstance;
-- (void)setAd:(ANNativeAd *)nativeAd;
-- (ANNativeAd *)getAd;
+- (void)setAd:(PMNativeAd *)nativeAd;
+- (PMNativeAd *)getAd;
 - (void)clearCache;
 - (void)getSize;
 

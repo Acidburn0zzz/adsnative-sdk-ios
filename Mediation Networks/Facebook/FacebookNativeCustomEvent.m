@@ -24,7 +24,6 @@ static const NSInteger FacebookNoFillErrorCode = 1001;
     NSString *placementID = [info objectForKey:@"placementId"];
     
     if (placementID) {
-        [FBAdSettings setMediationService:@"adsnative"];
         _fbNativeAd = [[FBNativeAd alloc] initWithPlacementID:placementID];
         self.fbNativeAd.delegate = self;
         [self.fbNativeAd loadAd];
@@ -38,7 +37,7 @@ static const NSInteger FacebookNoFillErrorCode = 1001;
 - (void)nativeAdDidLoad:(FBNativeAd *)nativeAd
 {
     FacebookNativeAdAdapter *adAdapter = [[FacebookNativeAdAdapter alloc] initWithFBNativeAd:nativeAd];
-    ANNativeAd *interfaceAd = [[ANNativeAd alloc] initWithAdAdapter:adAdapter];
+    PMNativeAd *interfaceAd = [[PMNativeAd alloc] initWithAdAdapter:adAdapter];
     
     NSMutableArray *imageURLs = [NSMutableArray array];
     

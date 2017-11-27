@@ -29,6 +29,9 @@ typedef id(^SingletonProviderBlock)();
 @class StreamAdPlacer;
 @class GeoLocationProvider;
 
+@class PMBannerCustomEvent;
+@protocol PMBannerCustomEventDelegate;
+
 @interface InstanceProvider : NSObject
 
 + (instancetype)sharedProvider;
@@ -55,4 +58,7 @@ typedef id(^SingletonProviderBlock)();
 
 - (StreamAdPlacer *)buildStreamAdPlacerWithViewController:(UIViewController *)controller adPositioning:(ANAdPositions *)positioning defaultAdRenderingClass:defaultAdRenderingClass;
 
+#pragma mark - Banner
+- (PMBannerCustomEvent *)buildBannerCustomEventFromCustomClass:(Class)customClass
+                                                      delegate:(id<PMBannerCustomEventDelegate>)delegate;
 @end

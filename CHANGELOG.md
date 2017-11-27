@@ -1,3 +1,6 @@
+## Version 3.0.0
+-- **Banner support for the SDK added!**
+
 ## Version 2.8.0
 -- **Add support for header bidding**
 

@@ -62,7 +62,7 @@ static NSString *gAppId = nil;
 -(void)nativeDidFinishLoading:(IMNative*)native
 {
     InMobiNativeAdAdapter *adAdapter = [[InMobiNativeAdAdapter alloc] initWithInMobiNativeAd:native];
-    ANNativeAd *interfaceAd = [[ANNativeAd alloc] initWithAdAdapter:adAdapter];
+    PMNativeAd *interfaceAd = [[PMNativeAd alloc] initWithAdAdapter:adAdapter];
     
     NSMutableArray *imageURLs = [NSMutableArray array];
     

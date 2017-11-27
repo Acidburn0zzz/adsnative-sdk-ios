@@ -28,8 +28,8 @@
     _placementId = placementID;
     
     if (placementID) {
-        self.sdk = [SharethroughSDK sharedTestSafeInstanceWithAdType:STRFakeAdTypeInstantPlayVideo];
-//        self.sdk = [SharethroughSDK sharedInstance];
+//        self.sdk = [SharethroughSDK sharedTestSafeInstanceWithAdType:STRFakeAdTypeYoutube];
+        self.sdk = [SharethroughSDK sharedInstance];
         
         //Clearing all cached ads
 //        [self.sdk clearCachedAdsForPlacement:self.placementId];
@@ -46,7 +46,7 @@
     
     ShareThroughNativeAdAdapter *adAdapter = [[ShareThroughNativeAdAdapter alloc] initWithSTRNativeAd:strAd andSTRSDK:self.sdk withPlacementId:self.placementId];
     
-    ANNativeAd *interfaceAd = [[ANNativeAd alloc] initWithAdAdapter:adAdapter];
+    PMNativeAd *interfaceAd = [[PMNativeAd alloc] initWithAdAdapter:adAdapter];
 
     [self.delegate nativeCustomEvent:self didLoadAd:interfaceAd];
 }

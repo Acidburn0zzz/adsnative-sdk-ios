@@ -6,7 +6,10 @@
 //  Copyright © 2017 AdsNative. All rights reserved.
 //
 
-#import <AdsNativeSDK/AdsNativeSDK.h>
+
+#import "PMNativeAd.h"
+#import "ANNativeAdDelegate.h"
+#import "AdAssets.h"
 
 #import "MPNativeAdAdapter.h"
 #import "MPNativeAdConstants.h"
@@ -16,7 +19,8 @@
 #import "MPStaticNativeAdImpressionTimer.h"
 
 
-@class ANNativeAd;
+
+@class PMNativeAd;
 @class MPAdConfiguration;
 
 @interface PolymorphNativeAdAdapter : NSObject <MPNativeAdAdapter>
@@ -24,7 +28,8 @@
 @property (nonatomic, weak) id<MPNativeAdAdapterDelegate> delegate;
 @property (nonatomic) MPAdConfiguration *adConfiguration;
 
-- (instancetype)initWithPMNativeAd:(ANNativeAd *)nativeAd;
+
+- (instancetype)initWithPMNativeAd:(PMNativeAd *)nativeAd;
 
 
 @end

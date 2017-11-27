@@ -16,6 +16,10 @@ extern const NSString *kNativeMainImageKey;
 extern const NSString *kNativeCTATextKey;
 extern const NSString *kNativeStarRatingKey;
 
+/* Banner Key */
+extern const NSString *kEmbedUrlKey;
+extern const NSString *kHtmlKey;
+
 /* Contains the view containing ad choices icon for third party sdk networks */
 extern const NSString *kNativeAdChoicesKey;
 

@@ -10,6 +10,11 @@
 #import <AdColony/AdColony.h>
 #import <AdColony/AdColonyNativeAdView.h>
 #import <AdsNativeSDK/AdsNativeSDK.h>
+//#import "AdAdapter.h"
+//#import "AdAssets.h"
+//#import "AdAdapterDelegate.h"
+//#import "Logging.h"
+//#import "AdErrors.h"
 
 @interface AdColonyNativeAdAdapter : NSObject <AdAdapter>
 

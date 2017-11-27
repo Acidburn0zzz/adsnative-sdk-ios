@@ -19,7 +19,7 @@ FOUNDATION_EXPORT const unsigned char AdsNativeSDKVersionString[];
 #import <AdsNativeSDK/ANServerAdPositions.h>
 #import <AdsNativeSDK/ANAdRendering.h>
 #import <AdsNativeSDK/ANAdRequestTargeting.h>
-#import <AdsNativeSDK/ANNativeAd.h>
+#import <AdsNativeSDK/PMNativeAd.h>
 #import <AdsNativeSDK/ANNativeAdDelegate.h>
 #import <AdsNativeSDK/ANNativeAdTrackerDelegate.h>
 #import <AdsNativeSDK/AdAdapter.h>
@@ -41,6 +41,8 @@ FOUNDATION_EXPORT const unsigned char AdsNativeSDKVersionString[];
 #import <AdsNativeSDK/ANCollectionViewAdPlacer.h>
 #import <AdsNativeSDK/ANTableViewAdPlacer.h>
 #import <AdsNativeSDK/PMPrefetchAds.h>
+#import <AdsNativeSDK/PMClass.h>
+#import <AdsNativeSDK/PMBannerView.h>
 
 @interface AdsNativeSDK : NSObject
 

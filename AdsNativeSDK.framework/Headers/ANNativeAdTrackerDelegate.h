@@ -4,7 +4,7 @@
 //  Created by Arvind Bharadwaj on 11/01/16.
 //  Copyright © 2016 AdsNative. All rights reserved.
 //
-@class ANNativeAd;
+@class PMNativeAd;
 
 @protocol ANNativeAdTrackerDelegate <NSObject>
 
@@ -30,6 +30,6 @@
  * a value "adsnative". For api network ads it will have "s2s" as its value and for other SDK networks, it
  * will have the name of the network adapter as its value, eg - "****NativeCustomEvent"
  */
-- (BOOL)anNativeAdDidClick:(ANNativeAd *)nativeAd;
+- (BOOL)anNativeAdDidClick:(PMNativeAd *)nativeAd;
 
 @end

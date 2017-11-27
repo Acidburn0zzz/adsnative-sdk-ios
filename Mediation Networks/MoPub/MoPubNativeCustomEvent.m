@@ -37,7 +37,7 @@
                 self.nativeAd = response;
                 
                 MoPubNativeAdAdapter *adAdapter = [[MoPubNativeAdAdapter alloc] initWithMPNativeAd:response];
-                ANNativeAd *interfaceAd = [[ANNativeAd alloc] initWithAdAdapter:adAdapter];
+                PMNativeAd *interfaceAd = [[PMNativeAd alloc] initWithAdAdapter:adAdapter];
                 
                 
                 NSMutableArray *imageURLs = [NSMutableArray array];

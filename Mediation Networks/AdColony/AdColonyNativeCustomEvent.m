@@ -55,7 +55,7 @@ static int x = 0;
 {
     AdColonyNativeAdAdapter *adAdapter = [[AdColonyNativeAdAdapter alloc] initWithAdColonyNativeAdView:adView];
     
-    ANNativeAd *interfaceAd = [[ANNativeAd alloc] initWithAdAdapter:adAdapter];
+    PMNativeAd *interfaceAd = [[PMNativeAd alloc] initWithAdAdapter:adAdapter];
     
     [self.delegate nativeCustomEvent:self didLoadAd:interfaceAd];
 }

@@ -54,7 +54,7 @@ NSString *sessionId;
 {
     FlurryNativeAdAdapter *adAdapter = [[FlurryNativeAdAdapter alloc] initWithFlurryNativeAd:nativeAd];
  
-    ANNativeAd *interfaceAd = [[ANNativeAd alloc] initWithAdAdapter:adAdapter];
+    PMNativeAd *interfaceAd = [[PMNativeAd alloc] initWithAdAdapter:adAdapter];
     
     NSMutableArray *imageURLs = [NSMutableArray array];
     

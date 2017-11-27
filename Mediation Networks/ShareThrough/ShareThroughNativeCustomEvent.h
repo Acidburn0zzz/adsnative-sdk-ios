@@ -6,7 +6,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AdsNativeSDK/AdsNativeSDK.h>
+//#import <AdsNativeSDK/AdsNativeSDK.h>
+#import "CustomEvent.h"
+#import "ANNativeAd.h"
+#import "AdAssets.h"
+#import "AdErrors.h"
+
 #import <SharethroughSDK/SharethroughSDK.h>
 
 @interface ShareThroughNativeCustomEvent : CustomEvent

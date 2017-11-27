@@ -15,7 +15,7 @@ typedef void(^MPNativeAdRequestHandler)(MPNativeAdRequest *request,
 
 @interface PMBidder()
 
-@property (nonatomic, strong) ANNativeAd *nativeAd;
+@property (nonatomic, strong) PMNativeAd *nativeAd;
 @property (nonatomic, copy) MPNativeAdRequestHandler handler;
 @property (nonatomic, strong) MPNativeAdRequest *mpNativeAdRequest;
 @property (nonatomic, strong) NSString *pmAdUnitID;
@@ -44,13 +44,17 @@ typedef void(^MPNativeAdRequestHandler)(MPNativeAdRequest *request,
     
     //clear PM ad cache before making a fresh request
     [[PMPrefetchAds getInstance] clearCache];
+<<<<<<< HEAD
     self.nativeAd = [[ANNativeAd alloc] initWithAdUnitId:self.pmAdUnitID viewController:nil];
+=======
+    self.nativeAd = [[PMNativeAd alloc] initWithAdUnitId:self.pmAdUnitID];
+>>>>>>> feature/banner
     self.nativeAd.delegate = self;
     [self.nativeAd loadAd];
 }
 
 #pragma mark - <ANNativeAdDelegate>
-- (void)anNativeAdDidLoad:(ANNativeAd *)nativeAd
+- (void)anNativeAdDidLoad:(PMNativeAd *)nativeAd
 {
     self.nativeAd = nativeAd;
     [[PMPrefetchAds getInstance] setAd:self.nativeAd];
@@ -96,7 +100,7 @@ typedef void(^MPNativeAdRequestHandler)(MPNativeAdRequest *request,
     }];
 }
 
-- (void)anNativeAd:(ANNativeAd *)nativeAd didFailWithError:(NSError *)error
+- (void)anNativeAd:(PMNativeAd *)nativeAd didFailWithError:(NSError *)error
 {
     [self.mpNativeAdRequest startWithCompletionHandler:^(MPNativeAdRequest *request, MPNativeAd *response, NSError *error) {
         if (self.handler) {

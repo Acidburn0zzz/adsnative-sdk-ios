@@ -14,7 +14,8 @@ static const CGFloat kMoPubRequiredViewVisibilityPercentage = 0.5;
 
 @interface PolymorphNativeAdAdapter() <ANNativeAdDelegate, MPAdDestinationDisplayAgentDelegate, MPStaticNativeAdImpressionTimerDelegate>
 
-@property (nonatomic, readonly) ANNativeAd *nativeAd;
+
+@property (nonatomic, readonly) PMNativeAd *nativeAd;
 @property (nonatomic, strong) NSDictionary *pmAdproperties;
 
 @property (nonatomic, readonly) MPAdDestinationDisplayAgent *destinationDisplayAgent;
@@ -27,7 +28,8 @@ static const CGFloat kMoPubRequiredViewVisibilityPercentage = 0.5;
 @synthesize properties = _properties;
 @synthesize defaultActionURL = _defaultActionURL;
 
-- (instancetype)initWithPMNativeAd:(ANNativeAd *)nativeAd
+
+- (instancetype)initWithPMNativeAd:(PMNativeAd *)nativeAd
 {
     self = [super init];
     

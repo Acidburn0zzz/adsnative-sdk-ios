@@ -76,7 +76,7 @@
 - (void)adLoader:(GADAdLoader *)adLoader didReceiveNativeAppInstallAd:(GADNativeAppInstallAd *)nativeAppInstallAd
 {
     DFPNativeAdAdapter *adAdapter = [[DFPNativeAdAdapter alloc] initWithDFPNativeAd:nativeAppInstallAd];
-    ANNativeAd *interfaceAd = [[ANNativeAd alloc] initWithAdAdapter:adAdapter];
+    PMNativeAd *interfaceAd = [[PMNativeAd alloc] initWithAdAdapter:adAdapter];
     [self adLoadedWithInterfaceAd:interfaceAd];
     
 }

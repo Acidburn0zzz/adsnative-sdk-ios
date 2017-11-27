@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class ANNativeAd;
+@class PMNativeAd;
 @class CustomEvent;
 
 /**
@@ -25,7 +25,7 @@
  * correct instance of your custom event.
  * @param adObject An `NativeAd` object, representing the ad that was retrieved.
  */
-- (void)nativeCustomEvent:(CustomEvent *)event didLoadAd:(ANNativeAd *)adObject;
+- (void)nativeCustomEvent:(CustomEvent *)event didLoadAd:(PMNativeAd *)adObject;
 
 /**
  * This method is called when the ad or any required ad assets fail to load.

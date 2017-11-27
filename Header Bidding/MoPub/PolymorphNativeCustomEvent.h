@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AdsNativeSDK/AdsNativeSDK.h>
 
 #if __has_include(<MoPub/MoPub.h>)
 #import <MoPub/MoPub.h>
@@ -19,7 +18,10 @@
 
 #endif
 
-
+#import "ANNativeAdDelegate.h"
+#import "PMNativeAd.h"
+#import "PMPrefetchAds.h"
+#import "AdAssets.h"
 
 @interface PolymorphNativeCustomEvent : MPNativeCustomEvent
 

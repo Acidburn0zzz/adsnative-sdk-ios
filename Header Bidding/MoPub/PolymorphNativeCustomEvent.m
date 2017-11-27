@@ -13,7 +13,7 @@ NSString *const kPolymorphPlacementID = @"placementId";
 
 @interface PolymorphNativeCustomEvent() <ANNativeAdDelegate>
 
-@property (nonatomic, strong) ANNativeAd *anNativeAd;
+@property (nonatomic, strong) PMNativeAd *pmNativeAd;
 
 @end
 
@@ -23,7 +23,7 @@ NSString *const kPolymorphPlacementID = @"placementId";
 - (void) requestAdWithCustomEventInfo:(NSDictionary *)info
 {
     NSString *adUnitID = [info objectForKey:kPolymorphPlacementID];
-//    adUnitID = @"ping";
+    adUnitID = @"ping";
     if (!adUnitID) {
         MPLogError(@"Failed native ad fetch. Missing required server extras [Polymorph Placement ID]");
         [self.delegate nativeCustomEvent:self didFailToLoadAdWithError:[NSError errorWithDomain:MoPubNativeAdsSDKDomain code:MPNativeAdErrorInvalidServerResponse userInfo:nil]];
@@ -32,19 +32,19 @@ NSString *const kPolymorphPlacementID = @"placementId";
         MPLogInfo(@"Server info fetched from MoPub for Polymorph. Placement ID: %@.", adUnitID);
     }
     
-    ANNativeAd *cachedAd = [[PMPrefetchAds getInstance] getAd];
+    PMNativeAd *cachedAd = [[PMPrefetchAds getInstance] getAd];
     if (cachedAd != nil) {
         [self anNativeAdDidLoad:cachedAd];
         
     } else {
-        self.anNativeAd = [[ANNativeAd alloc] initWithAdUnitId:adUnitID viewController:nil];
-        self.anNativeAd.delegate = self;
-        [self.anNativeAd loadAd];
+        self.pmNativeAd = [[PMNativeAd alloc] initWithAdUnitId:adUnitID];
+        self.pmNativeAd.delegate = self;
+        [self.pmNativeAd loadAd];
     }
 }
 
 #pragma mark - <ANNativeAdDelegate>
-- (void)anNativeAdDidLoad:(ANNativeAd *)nativeAd
+- (void)anNativeAdDidLoad:(PMNativeAd *)nativeAd
 {
     PolymorphNativeAdAdapter *adAdapter = [[PolymorphNativeAdAdapter alloc] initWithPMNativeAd:nativeAd];
     
@@ -70,7 +70,7 @@ NSString *const kPolymorphPlacementID = @"placementId";
     }];
 }
 
-- (void)anNativeAd:(ANNativeAd *)nativeAd didFailWithError:(NSError *)error
+- (void)anNativeAd:(PMNativeAd *)nativeAd didFailWithError:(NSError *)error
 {
     MPLogDebug(@"Polymorph failed to load with error: %@", error.description);
     [self.delegate nativeCustomEvent:self didFailToLoadAdWithError:error];

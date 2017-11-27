@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 AdsNative. All rights reserved.
 //
 
-#import "ANNativeAd.h"
+#import "PMNativeAd.h"
 
 /**
  * The ANAdRendering protocol provides methods for displaying ad content in
@@ -30,7 +30,7 @@
  * @see [NativeAd loadCallToActionTextIntoButton:]
  * @see [NativeAd loadImageForURL:intoImageView:]
  */
-- (void)layoutAdAssets:(ANNativeAd *)adObject;
+- (void)layoutAdAssets:(PMNativeAd *)adObject;
 
 @optional
 
