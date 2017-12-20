@@ -23,7 +23,7 @@ NSString *const kPolymorphPlacementID = @"placementId";
 - (void) requestAdWithCustomEventInfo:(NSDictionary *)info
 {
     NSString *adUnitID = [info objectForKey:kPolymorphPlacementID];
-    adUnitID = @"ping";
+    //adUnitID = @"ping";
     if (!adUnitID) {
         MPLogError(@"Failed native ad fetch. Missing required server extras [Polymorph Placement ID]");
         [self.delegate nativeCustomEvent:self didFailToLoadAdWithError:[NSError errorWithDomain:MoPubNativeAdsSDKDomain code:MPNativeAdErrorInvalidServerResponse userInfo:nil]];

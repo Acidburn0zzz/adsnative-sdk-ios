@@ -7,9 +7,7 @@
 //
 
 
-#import "PMNativeAd.h"
-#import "ANNativeAdDelegate.h"
-#import "AdAssets.h"
+#import <AdsNativeSDK/AdsNativeSDK.h>
 
 #import "MPNativeAdAdapter.h"
 #import "MPNativeAdConstants.h"

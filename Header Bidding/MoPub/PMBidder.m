@@ -44,11 +44,9 @@ typedef void(^MPNativeAdRequestHandler)(MPNativeAdRequest *request,
     
     //clear PM ad cache before making a fresh request
     [[PMPrefetchAds getInstance] clearCache];
-<<<<<<< HEAD
-    self.nativeAd = [[ANNativeAd alloc] initWithAdUnitId:self.pmAdUnitID viewController:nil];
-=======
+
     self.nativeAd = [[PMNativeAd alloc] initWithAdUnitId:self.pmAdUnitID];
->>>>>>> feature/banner
+
     self.nativeAd.delegate = self;
     [self.nativeAd loadAd];
 }

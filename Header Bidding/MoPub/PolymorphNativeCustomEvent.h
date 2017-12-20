@@ -18,10 +18,7 @@
 
 #endif
 
-#import "ANNativeAdDelegate.h"
-#import "PMNativeAd.h"
-#import "PMPrefetchAds.h"
-#import "AdAssets.h"
+#import <AdsNativeSDK/AdsNativeSDK.h>
 
 @interface PolymorphNativeCustomEvent : MPNativeCustomEvent
 

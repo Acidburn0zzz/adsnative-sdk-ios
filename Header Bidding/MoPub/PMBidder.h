@@ -8,11 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "ANNativeAdDelegate.h"
-#import "Logging.h"
-#import "PMNativeAd.h"
-#import "AdAssets.h"
-#import "PMPrefetchAds.h"
+#import <AdsNativeSDK/AdsNativeSDK.h>
 
 #if __has_include(<MoPub/MoPub.h>)
 #import <MoPub/MoPub.h>
