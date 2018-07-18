@@ -1,3 +1,5 @@
+## Version 3.1.0
+-- **Added DFP Header Bidding support for native ads**
 ## Version 3.0.0
 -- **Banner support for the SDK added!**
 
