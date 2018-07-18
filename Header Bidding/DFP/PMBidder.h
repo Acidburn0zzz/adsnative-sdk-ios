@@ -15,5 +15,5 @@
 
 - (instancetype)initWithPMAdUnitID:(NSString *)adUnitID;
 - (void)startWithAdLoader:(GADAdLoader *)gAdLoader viewController:(UIViewController *)controller;
-
+- (void)startWithAdLoader:(GADAdLoader *)gAdLoader viewController:(UIViewController *)controller dfpRequest:(DFPRequest *)request;
 @end
