@@ -13,6 +13,7 @@
 @property (nonatomic, strong) PMClass *pmClass;
 
 @property (nonatomic, strong) GADAdLoader *gAdLoader;
+@property (nonatomic, strong) DFPRequest *dfpRequest;
 @property (nonatomic, strong) NSString *pmAdUnitID;
 @property (nonatomic, weak) id<GADAdLoaderDelegate> delegate;
 
@@ -32,8 +33,15 @@
 
 - (void)startWithAdLoader:(GADAdLoader *)gAdLoader viewController:(UIViewController *)controller
 {
+    [self startWithAdLoader:gAdLoader viewController:controller dfpRequest:nil];
+}
+
+- (void)startWithAdLoader:(GADAdLoader *)gAdLoader viewController:(UIViewController *)controller dfpRequest:(DFPRequest *)request
+{
     self.gAdLoader = gAdLoader;
     self.controller = controller;
+    self.dfpRequest = request;
+ 
     //clear PM ad cache before making a fresh request
     [[PMPrefetchAds getInstance] clearCache];
     
@@ -46,6 +54,7 @@
     targeting.keywords = keywords;
     
     [self.pmClass loadPMAdWithTargeting:targeting];
+    
 }
 
 #pragma mark - <PMCLassDelegate>
@@ -54,16 +63,27 @@
     self.nativeAd = nativeAd;
     [[PMPrefetchAds getInstance] setAd:self.nativeAd];
     
-    DFPRequest *request = [DFPRequest request];
     if ([nativeAd.nativeAssets objectForKey:kNativeEcpmKey] != nil) {
         NSString *ecpmAsString = [NSString stringWithFormat:@"%.2f", self.nativeAd.biddingEcpm];
-        request.customTargeting = @{@"ecpm": ecpmAsString};
+        
         LogDebug(@"Making DFP request with ecpm: %@", ecpmAsString);
+        if (self.dfpRequest != NULL) {
+            if (self.dfpRequest.customTargeting != NULL) {
+                NSMutableDictionary *targeting = [[NSMutableDictionary alloc] initWithDictionary:self.dfpRequest.customTargeting];
+                [targeting setObject:ecpmAsString forKey:@"ecpm"];
+                self.dfpRequest.customTargeting = targeting;
+            } else {
+                self.dfpRequest.customTargeting = @{@"ecpm": ecpmAsString};
+            }
+        } else {
+            self.dfpRequest = [DFPRequest request];
+            self.dfpRequest.customTargeting = @{@"ecpm": ecpmAsString};
+        }
     } else {
         LogDebug(@"Ecpm not present in Polymorph response. Loading default DFP ad.");
     }
-    request.testDevices = @[@"9E608075-8B96-417E-9C77-D5E3A4BB8CED"];
-    [self.gAdLoader loadRequest:request];
+
+    [self.gAdLoader loadRequest:self.dfpRequest];
     
 }
 

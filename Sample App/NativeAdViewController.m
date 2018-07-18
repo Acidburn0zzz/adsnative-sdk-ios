@@ -30,6 +30,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSString *pm_adunit = @"ping";
+    NSString *dfp_adunit = @"dfp_ping";
+ 
     [_loadAdButton addTarget:self action:@selector(loadAd) forControlEvents:UIControlEventTouchUpInside];
     
     [self.indicator stopAnimating];
@@ -38,11 +41,11 @@
     options.disableImageLoading = NO;
     options.shouldRequestMultipleImages = NO;
     
-    self.adLoader = [[GADAdLoader alloc] initWithAdUnitID:@"/21666124832/pm_test" rootViewController:self adTypes:@[kGADAdLoaderAdTypeNativeAppInstall, kGADAdLoaderAdTypeNativeContent] options:@[options]];
+    self.adLoader = [[GADAdLoader alloc] initWithAdUnitID:dfp_adunit rootViewController:self adTypes:@[kGADAdLoaderAdTypeNativeAppInstall, kGADAdLoaderAdTypeNativeContent] options:@[options]];
     
     self.adLoader.delegate = self;
     
-    self.bidder = [[PMBidder alloc] initWithPMAdUnitID:@"NosADe7KvUy4b326YAeoGdVcIhxIwhKFAlje1GWv"];
+    self.bidder = [[PMBidder alloc] initWithPMAdUnitID:pm_adunit];
 }
 
 - (void)didReceiveMemoryWarning {
