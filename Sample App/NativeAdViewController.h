@@ -13,7 +13,6 @@
 
 @property (strong, nonatomic) IBOutlet UIView *adViewContainer;
 
-@property (strong, nonatomic) IBOutlet UIButton *loadTableViewButton;
 @property (strong, nonatomic) IBOutlet UIButton *loadAdButton;
 
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *indicator;

@@ -14,12 +14,18 @@
 		5C25A4C31BCD7F7B0025A3B3 /* NativeAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C25A4C11BCD7F7A0025A3B3 /* NativeAdViewController.m */; };
 		5C25A4C41BCD7F7B0025A3B3 /* NativeAdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C25A4C21BCD7F7A0025A3B3 /* NativeAdViewController.xib */; };
 		5C25A4C71BD0F7060025A3B3 /* NativeAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C25A4C61BD0F7060025A3B3 /* NativeAdView.m */; };
-		5C3D90141BD7B03C002A7DCB /* TableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C3D90131BD7B03C002A7DCB /* TableViewController.xib */; };
 		5C3D90161BD7B590002A7DCB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C3D90151BD7B590002A7DCB /* Main.storyboard */; };
 		5C42480C1BD6597600DA0540 /* NativeAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C42480B1BD6597600DA0540 /* NativeAdView.xib */; };
+		5CA2943820FE0DD800DF4311 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CA2943720FE0DD800DF4311 /* GoogleMobileAds.framework */; };
+		5CA2944820FE0DE200DF4311 /* PolymorphDFPNativeAdAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA2943D20FE0DE100DF4311 /* PolymorphDFPNativeAdAdapter.m */; };
+		5CA2944920FE0DE200DF4311 /* PolymorphDFPNativeCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA2943E20FE0DE100DF4311 /* PolymorphDFPNativeCustomEvent.m */; };
+		5CA2944A20FE0DE200DF4311 /* PMBidder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA2943F20FE0DE100DF4311 /* PMBidder.m */; };
+		5CA2945420FE0E1C00DF4311 /* DFPNativeContentAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CA2944E20FE0E1B00DF4311 /* DFPNativeContentAdView.xib */; };
+		5CA2945520FE0E1C00DF4311 /* DFPNativeAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CA2944F20FE0E1B00DF4311 /* DFPNativeAdView.xib */; };
+		5CA2945620FE0E1C00DF4311 /* DFPNativeAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA2945020FE0E1B00DF4311 /* DFPNativeAdView.m */; };
+		5CA2945720FE0E1C00DF4311 /* DFPNativeContentAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA2945220FE0E1C00DF4311 /* DFPNativeContentAdView.m */; };
 		5CBE8AA81BA96D95000DBCFE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBE8AA71BA96D95000DBCFE /* main.m */; };
 		5CBE8AAB1BA96D95000DBCFE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBE8AAA1BA96D95000DBCFE /* AppDelegate.m */; };
-		5CBE8AAE1BA96D95000DBCFE /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBE8AAD1BA96D95000DBCFE /* TableViewController.m */; };
 		5CBE8AB31BA96D95000DBCFE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CBE8AB21BA96D95000DBCFE /* Images.xcassets */; };
 		5CBE8AB61BA96D95000DBCFE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CBE8AB41BA96D95000DBCFE /* LaunchScreen.xib */; };
 		5CBE8AC21BA96D95000DBCFE /* AdsNative_iOS_SDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBE8AC11BA96D95000DBCFE /* AdsNative_iOS_SDKTests.m */; };
@@ -70,17 +76,27 @@
 		5C25A4C21BCD7F7A0025A3B3 /* NativeAdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NativeAdViewController.xib; sourceTree = "<group>"; };
 		5C25A4C51BD0F7060025A3B3 /* NativeAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeAdView.h; sourceTree = "<group>"; };
 		5C25A4C61BD0F7060025A3B3 /* NativeAdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeAdView.m; sourceTree = "<group>"; };
-		5C3D90131BD7B03C002A7DCB /* TableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewController.xib; sourceTree = "<group>"; };
 		5C3D90151BD7B590002A7DCB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		5C42480B1BD6597600DA0540 /* NativeAdView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NativeAdView.xib; sourceTree = "<group>"; };
 		5C9CAB4A1BE88DEE001C28DC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		5CA2943720FE0DD800DF4311 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
+		5CA2943B20FE0DE100DF4311 /* PolymorphDFPNativeCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolymorphDFPNativeCustomEvent.h; sourceTree = "<group>"; };
+		5CA2943C20FE0DE100DF4311 /* PMBidder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMBidder.h; sourceTree = "<group>"; };
+		5CA2943D20FE0DE100DF4311 /* PolymorphDFPNativeAdAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PolymorphDFPNativeAdAdapter.m; sourceTree = "<group>"; };
+		5CA2943E20FE0DE100DF4311 /* PolymorphDFPNativeCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PolymorphDFPNativeCustomEvent.m; sourceTree = "<group>"; };
+		5CA2943F20FE0DE100DF4311 /* PMBidder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMBidder.m; sourceTree = "<group>"; };
+		5CA2944020FE0DE100DF4311 /* PolymorphDFPNativeAdAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolymorphDFPNativeAdAdapter.h; sourceTree = "<group>"; };
+		5CA2944E20FE0E1B00DF4311 /* DFPNativeContentAdView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DFPNativeContentAdView.xib; sourceTree = "<group>"; };
+		5CA2944F20FE0E1B00DF4311 /* DFPNativeAdView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DFPNativeAdView.xib; sourceTree = "<group>"; };
+		5CA2945020FE0E1B00DF4311 /* DFPNativeAdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFPNativeAdView.m; sourceTree = "<group>"; };
+		5CA2945120FE0E1B00DF4311 /* DFPNativeAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPNativeAdView.h; sourceTree = "<group>"; };
+		5CA2945220FE0E1C00DF4311 /* DFPNativeContentAdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFPNativeContentAdView.m; sourceTree = "<group>"; };
+		5CA2945320FE0E1C00DF4311 /* DFPNativeContentAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPNativeContentAdView.h; sourceTree = "<group>"; };
 		5CBE8AA21BA96D95000DBCFE /* Sample App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sample App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CBE8AA61BA96D95000DBCFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CBE8AA71BA96D95000DBCFE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5CBE8AA91BA96D95000DBCFE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5CBE8AAA1BA96D95000DBCFE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		5CBE8AAC1BA96D95000DBCFE /* TableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
-		5CBE8AAD1BA96D95000DBCFE /* TableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		5CBE8AB21BA96D95000DBCFE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5CBE8AB51BA96D95000DBCFE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		5CBE8ABB1BA96D95000DBCFE /* Sample App.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sample App.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CA2943820FE0DD800DF4311 /* GoogleMobileAds.framework in Frameworks */,
 				5CD183681FCC21E40077E5E2 /* WebKit.framework in Frameworks */,
 				5CFD38691C4F4731007F5C08 /* AVKit.framework in Frameworks */,
 				5CFD38671C4F472C007F5C08 /* MediaPlayer.framework in Frameworks */,
@@ -162,6 +179,7 @@
 		5C01DC161BC67E7600491F9B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5CA2943720FE0DD800DF4311 /* GoogleMobileAds.framework */,
 				5CD183671FCC21E40077E5E2 /* WebKit.framework */,
 				5CFD38701C4FA28A007F5C08 /* AdsNativeSDK.framework */,
 				5CFD38681C4F4731007F5C08 /* AVKit.framework */,
@@ -173,9 +191,31 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5CA2943920FE0DE100DF4311 /* Header Bidding */ = {
+			isa = PBXGroup;
+			children = (
+				5CA2943A20FE0DE100DF4311 /* DFP */,
+			);
+			path = "Header Bidding";
+			sourceTree = "<group>";
+		};
+		5CA2943A20FE0DE100DF4311 /* DFP */ = {
+			isa = PBXGroup;
+			children = (
+				5CA2943C20FE0DE100DF4311 /* PMBidder.h */,
+				5CA2943F20FE0DE100DF4311 /* PMBidder.m */,
+				5CA2943B20FE0DE100DF4311 /* PolymorphDFPNativeCustomEvent.h */,
+				5CA2943E20FE0DE100DF4311 /* PolymorphDFPNativeCustomEvent.m */,
+				5CA2944020FE0DE100DF4311 /* PolymorphDFPNativeAdAdapter.h */,
+				5CA2943D20FE0DE100DF4311 /* PolymorphDFPNativeAdAdapter.m */,
+			);
+			path = DFP;
+			sourceTree = "<group>";
+		};
 		5CBE8A991BA96D95000DBCFE = {
 			isa = PBXGroup;
 			children = (
+				5CA2943920FE0DE100DF4311 /* Header Bidding */,
 				5CBE8AA41BA96D95000DBCFE /* Sample App */,
 				5CBE8ABE1BA96D95000DBCFE /* Sample AppTests */,
 				5CBE8AA31BA96D95000DBCFE /* Products */,
@@ -195,6 +235,12 @@
 		5CBE8AA41BA96D95000DBCFE /* Sample App */ = {
 			isa = PBXGroup;
 			children = (
+				5CA2945120FE0E1B00DF4311 /* DFPNativeAdView.h */,
+				5CA2945020FE0E1B00DF4311 /* DFPNativeAdView.m */,
+				5CA2944F20FE0E1B00DF4311 /* DFPNativeAdView.xib */,
+				5CA2945320FE0E1C00DF4311 /* DFPNativeContentAdView.h */,
+				5CA2945220FE0E1C00DF4311 /* DFPNativeContentAdView.m */,
+				5CA2944E20FE0E1B00DF4311 /* DFPNativeContentAdView.xib */,
 				5C01DB7B1BC2F92A00491F9B /* images */,
 				5CBE8AA91BA96D95000DBCFE /* AppDelegate.h */,
 				5CBE8AAA1BA96D95000DBCFE /* AppDelegate.m */,
@@ -205,9 +251,6 @@
 				5C25A4C51BD0F7060025A3B3 /* NativeAdView.h */,
 				5C25A4C61BD0F7060025A3B3 /* NativeAdView.m */,
 				5C42480B1BD6597600DA0540 /* NativeAdView.xib */,
-				5CBE8AAC1BA96D95000DBCFE /* TableViewController.h */,
-				5CBE8AAD1BA96D95000DBCFE /* TableViewController.m */,
-				5C3D90131BD7B03C002A7DCB /* TableViewController.xib */,
 				5CBE8AB21BA96D95000DBCFE /* Images.xcassets */,
 				5CBE8AB41BA96D95000DBCFE /* LaunchScreen.xib */,
 				5CBE8AA51BA96D95000DBCFE /* Supporting Files */,
@@ -340,9 +383,10 @@
 				5C25A4C41BCD7F7B0025A3B3 /* NativeAdViewController.xib in Resources */,
 				5CDEF0141BC78C5E00C315D5 /* full_breakfast.jpg in Resources */,
 				5CDEF0191BC78C5E00C315D5 /* instant_noodle_with_egg.jpg in Resources */,
+				5CA2945420FE0E1C00DF4311 /* DFPNativeContentAdView.xib in Resources */,
 				5C3D90161BD7B590002A7DCB /* Main.storyboard in Resources */,
 				5CDEF0181BC78C5E00C315D5 /* hamburger.jpg in Resources */,
-				5C3D90141BD7B03C002A7DCB /* TableViewController.xib in Resources */,
+				5CA2945520FE0E1C00DF4311 /* DFPNativeAdView.xib in Resources */,
 				5CDEF0111BC78C5E00C315D5 /* angry_birds_cake.jpg in Resources */,
 				5CDEF01F1BC78C5E00C315D5 /* vegetable_curry.jpg in Resources */,
 				5CDEF01E1BC78C5E00C315D5 /* thai_shrimp_cake.jpg in Resources */,
@@ -375,12 +419,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5CBE8AAE1BA96D95000DBCFE /* TableViewController.m in Sources */,
+				5CA2945720FE0E1C00DF4311 /* DFPNativeContentAdView.m in Sources */,
 				5C01DBA41BC3044A00491F9B /* ANAdTableViewCell.m in Sources */,
 				5CBE8AAB1BA96D95000DBCFE /* AppDelegate.m in Sources */,
 				5C25A4C71BD0F7060025A3B3 /* NativeAdView.m in Sources */,
 				5CDEF0271BC7C8A200C315D5 /* ANAdTableViewCellNew.m in Sources */,
+				5CA2945620FE0E1C00DF4311 /* DFPNativeAdView.m in Sources */,
+				5CA2944820FE0DE200DF4311 /* PolymorphDFPNativeAdAdapter.m in Sources */,
+				5CA2944920FE0DE200DF4311 /* PolymorphDFPNativeCustomEvent.m in Sources */,
 				5CBE8AA81BA96D95000DBCFE /* main.m in Sources */,
+				5CA2944A20FE0DE200DF4311 /* PMBidder.m in Sources */,
 				5C01DBA01BC2FCE100491F9B /* SimpleTableViewCell.m in Sources */,
 				5C25A4C31BCD7F7B0025A3B3 /* NativeAdViewController.m in Sources */,
 			);
@@ -513,6 +561,7 @@
 					"$(inherited)",
 					"/Users/arvindbharadwaj/Downloads/FacebookSDKs-iOS-20151007",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/MoPubSDK_2/Viewability/MOAT",
 				);
 				INFOPLIST_FILE = "$(PROJECT_NAME)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -530,6 +579,7 @@
 					Networks/Flurry/Flurry,
 					"$(PROJECT_DIR)/Mediation",
 					Networks/Flurry/FlurryAds,
+					"$(PROJECT_DIR)/MoPubSDK_2/Viewability/Avid",
 				);
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.adsnative.$(PRODUCT_NAME:rfc1034identifier)";
@@ -552,6 +602,7 @@
 					"$(inherited)",
 					"/Users/arvindbharadwaj/Downloads/FacebookSDKs-iOS-20151007",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/MoPubSDK_2/Viewability/MOAT",
 				);
 				INFOPLIST_FILE = "$(PROJECT_NAME)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -569,6 +620,7 @@
 					Networks/Flurry/Flurry,
 					"$(PROJECT_DIR)/Mediation",
 					Networks/Flurry/FlurryAds,
+					"$(PROJECT_DIR)/MoPubSDK_2/Viewability/Avid",
 				);
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.adsnative.$(PRODUCT_NAME:rfc1034identifier)";

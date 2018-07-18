@@ -11,36 +11,38 @@
 
 #import <AdsNativeSDK/AdsNativeSDK.h>
 
-@interface NativeAdViewController () <PMClassDelegate>
+#import <GoogleMobileAds/GoogleMobileAds.h>
+#import "DFPNativeAdView.h"
+#import "DFPNativeContentAdView.h"
+#import "PMBidder.h"
 
-@property (nonatomic, strong) PMClass *pmClass;
+@interface NativeAdViewController () <GADAdLoaderDelegate, GADNativeAppInstallAdLoaderDelegate, GADNativeContentAdLoaderDelegate>
+
 @property (nonatomic, strong) PMNativeAd *nativeAd;
 @property (nonatomic, strong) PMBannerView *pmBannerView;
 
+@property (nonatomic, strong) GADAdLoader *adLoader;
+@property (nonatomic, strong) PMBidder *bidder;
 @end
 
 @implementation NativeAdViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    // Do any additional setup after loading the view from its nib.
     
-    [_loadTableViewButton addTarget:self action:@selector(loadTableViewAds) forControlEvents:UIControlEventTouchUpInside];
     [_loadAdButton addTarget:self action:@selector(loadAd) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.indicator startAnimating];
-    
-    /****** Polymorph code for ad call ******/
-    LogSetLevel(LogLevelDebug);
-    self.pmClass = [[PMClass alloc] initWithAdUnitID:@"ping" requestType:PM_REQUEST_TYPE_NATIVE withBannerSize:CGSizeMake(0, 0)];
-    
-    //For banner requests
-//    self.pmClass  = [[PMClass alloc] initWithAdUnitID:@"pUW7n6VJQesm68GmdYyDA4IZhNzjm8CC3KrDVzLU" requestType:PM_REQUEST_TYPE_BANNER withBannerSize:self.adViewContainer.bounds.size];
-
-    self.pmClass.delegate = self;
-    
     [self.indicator stopAnimating];
+    
+    GADNativeAdImageAdLoaderOptions *options = [[GADNativeAdImageAdLoaderOptions alloc] init];
+    options.disableImageLoading = NO;
+    options.shouldRequestMultipleImages = NO;
+    
+    self.adLoader = [[GADAdLoader alloc] initWithAdUnitID:@"/21666124832/pm_test" rootViewController:self adTypes:@[kGADAdLoaderAdTypeNativeAppInstall, kGADAdLoaderAdTypeNativeContent] options:@[options]];
+    
+    self.adLoader.delegate = self;
+    
+    self.bidder = [[PMBidder alloc] initWithPMAdUnitID:@"NosADe7KvUy4b326YAeoGdVcIhxIwhKFAlje1GWv"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,34 +56,11 @@
     [[self.adViewContainer subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     [self.indicator startAnimating];
-    [self.pmClass loadPMAd];
+    [self.bidder startWithAdLoader:self.adLoader viewController:self];
 }
 
-- (void)loadTableViewAds
-{
-    TableViewController *tableViewController = [[TableViewController alloc] init];
-    [self presentViewController:tableViewController animated:YES completion:nil];
-}
-
-#pragma mark - <PMClassDelegate>
-- (void)pmNativeAdDidLoad:(PMNativeAd *)nativeAd {
-    [self.indicator stopAnimating];
-    
-    //have a strong retain of the native ad instance
-    self.nativeAd = nativeAd;
-    
-    //Use this for dynamic layout switching. Make sure your UIView class implements `ANAdRendering` protocol
-    UIView *adView =[nativeAd renderNativeAdWithDefaultRenderingClass:[NativeAdView class] withBounds:self.adViewContainer.bounds];
-    
-    /* You may call this instead of `renderNativeAdWithDefaultRenderingClass` if you wish to pass the ad view directly.*/
-//    [nativeAd registerNativeAdForView:adView];
-    
-    
-    [self.adViewContainer addSubview:adView];
-       
-}
-
-- (void)pmNativeAd:(PMNativeAd *)nativeAd didFailWithError:(NSError *)error {
+#pragma mark - <GADAdLoaderDelegate>
+- (void)adLoader:(nonnull GADAdLoader *)adLoader didFailToReceiveAdWithError:(nonnull GADRequestError *)error {
     NSLog(@"Native ad request failed with error:%@",error);
     [self.indicator stopAnimating];
     
@@ -94,42 +73,51 @@
     [alert show];
 }
 
-- (void)pmNativeAdDidRecordImpression
-{
-    NSLog(@"Native Ad Impression Recorded");
-}
-
-- (BOOL)pmNativeAdDidClick:(PMNativeAd *)nativeAd
-{
-    NSLog(@"Native Ad Did Click");
-//    NSString *landingUrl = [nativeAd.nativeAssets objectForKey:kNativeLandingUrlKey];
-//    NSLog(@"Landing url:%@",landingUrl);
-//    if ([nativeAd.providerName isEqualToString:@"adsnative"]) {
-//
-//        /** Handle Click **/
-//        return YES;
-//    } else {
-//        return NO;
-//    }
+#pragma mark - <GADNativeAppInstallAdLoaderDelegate>
+- (void)adLoader:(nonnull GADAdLoader *)adLoader didReceiveNativeAppInstallAd:(nonnull GADNativeAppInstallAd *)nativeAppInstallAd {
+    NSLog(@"Received DFP app install ad");
+    [self.indicator stopAnimating];
     
-    return NO;
+    NSArray *nibObjects = [[NSBundle mainBundle] loadNibNamed:@"DFPNativeAdView" owner:nil options:nil];
+    DFPNativeAdView *nibView = [nibObjects objectAtIndex:0];
+    nibView.nativeAppInstallAd = nativeAppInstallAd;
+    
+    ((UILabel *)nibView.headlineView).text = nativeAppInstallAd.headline;
+    ((UILabel *)nibView.bodyView).text = nativeAppInstallAd.body;
+    [((UIButton *)nibView.callToActionView)setTitle:nativeAppInstallAd.callToAction
+                                           forState:UIControlStateNormal];
+    
+    GADNativeAdImage *firstImage = nativeAppInstallAd.images.firstObject;
+    ((UIImageView *)nibView.imageView).image = firstImage.image;
+    ((UIImageView *)nibView.iconView).image = nativeAppInstallAd.icon.image;
+    
+    nibView.callToActionView.userInteractionEnabled = NO;
+    
+    [self.adViewContainer addSubview:nibView];
 }
 
-- (void)pmBannerAdDidLoad:(PMBannerView *)adView
-{
+#pragma mark - <GADNativeContentAdLoaderDelegate>
+- (void)adLoader:(nonnull GADAdLoader *)adLoader didReceiveNativeContentAd:(nonnull GADNativeContentAd *)nativeContentAd {
+    NSLog(@"Received DFP content ad");
     [self.indicator stopAnimating];
-    [self.adViewContainer addSubview:adView];
-    NSLog(@"Banner loaded");
+    
+    NSArray *nibObjects = [[NSBundle mainBundle] loadNibNamed:@"DFPNativeContentAdView" owner:nil options:nil];
+    DFPNativeContentAdView *nibView = [nibObjects objectAtIndex:0];
+    nibView.nativeContentAd = nativeContentAd;
+    
+    ((UILabel *)nibView.headlineView).text = nativeContentAd.headline;
+    ((UILabel *)nibView.bodyView).text = nativeContentAd.body;
+    [((UIButton *)nibView.callToActionView)setTitle:nativeContentAd.callToAction
+                                           forState:UIControlStateNormal];
+    
+    GADNativeAdImage *firstImage = nativeContentAd.images.firstObject;
+    ((UIImageView *)nibView.imageView).image = firstImage.image;
+    ((UIImageView *)nibView.logoView).image = nativeContentAd.logo.image;
+    
+    nibView.callToActionView.userInteractionEnabled = NO;
+    
+    [self.adViewContainer addSubview:nibView];
 }
 
-- (void)pmBannerAdDidFailToLoad:(PMBannerView *)view withError:(NSError *)error
-{
-    [self.indicator stopAnimating];
-    NSLog(@"Banner failed to load %@", error);
-}
 
-- (UIViewController *)pmViewControllerForPresentingModalView
-{
-    return self;
-}
 @end
