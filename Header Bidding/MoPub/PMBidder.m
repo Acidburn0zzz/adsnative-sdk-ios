@@ -45,10 +45,15 @@ typedef void(^MPNativeAdRequestHandler)(MPNativeAdRequest *request,
     //clear PM ad cache before making a fresh request
     [[PMPrefetchAds getInstance] clearCache];
 
-    self.nativeAd = [[PMNativeAd alloc] initWithAdUnitId:self.pmAdUnitID];
-
-    self.nativeAd.delegate = self;
-    [self.nativeAd loadAd];
+    self.pmClass = [[PMClass alloc] initWithAdUnitID:self.pmAdUnitID requestType:PM_REQUEST_TYPE_NATIVE withBannerSize:CGSizeMake(0,0)];
+    self.pmClass.delegate = self;
+    
+    ANAdRequestTargeting *targeting = [ANAdRequestTargeting targeting];
+    NSMutableArray *keywords = [[NSMutableArray alloc] init];
+    [keywords addObject:@"&hb=1"];
+    targeting.keywords = keywords;
+    
+    [self.pmClass loadPMAdWithTargeting:targeting];
 }
 
 #pragma mark - <ANNativeAdDelegate>
