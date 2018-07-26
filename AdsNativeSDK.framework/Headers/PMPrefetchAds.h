@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PMNativeAd.h"
+#import "PMBannerView.h"
 
 @interface PMPrefetchAds : NSObject
 
@@ -16,5 +17,7 @@
 - (PMNativeAd *)getAd;
 - (void)clearCache;
 - (void)getSize;
+- (PMBannerView *)getBannerAd;
+- (void)setBannerAd:(PMBannerView *)bannerAd;
 
 @end
