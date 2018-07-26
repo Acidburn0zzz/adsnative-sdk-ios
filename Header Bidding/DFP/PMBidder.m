@@ -11,11 +11,14 @@
 
 @property (nonatomic, strong) PMNativeAd *nativeAd;
 @property (nonatomic, strong) PMClass *pmClass;
+@property (nonatomic, strong) PMBannerView *pmBannerView;
 
 @property (nonatomic, strong) GADAdLoader *gAdLoader;
 @property (nonatomic, strong) DFPRequest *dfpRequest;
 @property (nonatomic, strong) NSString *pmAdUnitID;
 @property (nonatomic, weak) id<GADAdLoaderDelegate> delegate;
+
+@property (nonnull, strong) DFPBannerView *dfpBannerView;
 
 @property (nonatomic, strong) UIViewController *controller;
 @end
@@ -41,7 +44,7 @@
     self.gAdLoader = gAdLoader;
     self.controller = controller;
     self.dfpRequest = request;
- 
+    
     //clear PM ad cache before making a fresh request
     [[PMPrefetchAds getInstance] clearCache];
     
@@ -55,6 +58,32 @@
     
     [self.pmClass loadPMAdWithTargeting:targeting];
     
+}
+
+- (void)startWithBannerView:(DFPBannerView *)dfpBannerView viewController:(UIViewController *)controller withBannerSize:(CGSize)bannerSize
+{
+    [self startWithBannerView:dfpBannerView viewController:controller dfpRequest:nil withBannerSize:bannerSize];
+}
+
+- (void)startWithBannerView:(DFPBannerView *)dfpBannerView viewController:(UIViewController *)controller dfpRequest:(DFPRequest *)request withBannerSize:(CGSize)bannerSize
+{
+    self.dfpBannerView = dfpBannerView;
+    self.controller = controller;
+    self.dfpRequest = request;
+    
+    //clear PM ad cache before making a fresh request
+    [[PMPrefetchAds getInstance] clearCache];
+    
+    self.pmClass = [[PMClass alloc] initWithAdUnitID:self.pmAdUnitID requestType:PM_REQUEST_TYPE_BANNER withBannerSize:bannerSize];
+    [self.pmClass stopAutomaticallyRefreshingContents];
+    self.pmClass.delegate = self;
+    
+    ANAdRequestTargeting *targeting = [ANAdRequestTargeting targeting];
+    NSMutableArray *keywords = [[NSMutableArray alloc] init];
+    [keywords addObject:@"&hb=1"];
+    targeting.keywords = keywords;
+    
+    [self.pmClass loadPMAdWithTargeting:targeting];
 }
 
 #pragma mark - <PMCLassDelegate>
@@ -82,7 +111,7 @@
     } else {
         LogDebug(@"Ecpm not present in Polymorph response. Loading default DFP ad.");
     }
-
+    
     [self.gAdLoader loadRequest:self.dfpRequest];
     
 }
@@ -90,6 +119,38 @@
 - (void)pmNativeAd:(PMNativeAd *)nativeAd didFailWithError:(NSError *)error
 {
     [self.gAdLoader loadRequest:[DFPRequest request]];
+}
+
+- (void)pmBannerAdDidLoad:(PMBannerView *)adView
+{
+    self.pmBannerView = adView;
+    [[PMPrefetchAds getInstance] setBannerAd:self.pmBannerView];
+    
+    if (self.pmBannerView.biddingEcpm != -1) {
+        NSString *ecpmAsString = [NSString stringWithFormat:@"%.2f", self.pmBannerView.biddingEcpm];
+        
+        LogDebug(@"Making DFP request with ecpm: %@", ecpmAsString);
+        if (self.dfpRequest != NULL) {
+            if (self.dfpRequest.customTargeting != NULL) {
+                NSMutableDictionary *targeting = [[NSMutableDictionary alloc] initWithDictionary:self.dfpRequest.customTargeting];
+                [targeting setObject:ecpmAsString forKey:@"ecpm"];
+                self.dfpRequest.customTargeting = targeting;
+            } else {
+                self.dfpRequest.customTargeting = @{@"ecpm": ecpmAsString};
+            }
+        } else {
+            self.dfpRequest = [DFPRequest request];
+            self.dfpRequest.customTargeting = @{@"ecpm": ecpmAsString};
+        }
+    } else {
+        LogDebug(@"Ecpm not present in Polymorph response. Loading default DFP ad.");
+    }
+    [self.dfpBannerView loadRequest:self.dfpRequest];
+}
+
+- (void)pmBannerAdDidFailToLoad:(PMBannerView *)view withError:(NSError *)error
+{
+    [self.dfpBannerView loadRequest:[DFPRequest request]];
 }
 
 - (UIViewController *)pmViewControllerForPresentingModalView {

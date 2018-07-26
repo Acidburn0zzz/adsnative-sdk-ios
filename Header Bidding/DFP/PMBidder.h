@@ -14,6 +14,12 @@
 @interface PMBidder : NSObject <PMClassDelegate>
 
 - (instancetype)initWithPMAdUnitID:(NSString *)adUnitID;
+
+/** Native Ads **/
 - (void)startWithAdLoader:(GADAdLoader *)gAdLoader viewController:(UIViewController *)controller;
 - (void)startWithAdLoader:(GADAdLoader *)gAdLoader viewController:(UIViewController *)controller dfpRequest:(DFPRequest *)request;
+
+/** Banner Ads **/
+- (void)startWithBannerView:(DFPBannerView *)dfpBannerView viewController:(UIViewController *)controller withBannerSize:(CGSize)bannerSize;
+- (void)startWithBannerView:(DFPBannerView *)dfpBannerView viewController:(UIViewController *)controller dfpRequest:(DFPRequest *)request withBannerSize:(CGSize)bannerSize;
 @end

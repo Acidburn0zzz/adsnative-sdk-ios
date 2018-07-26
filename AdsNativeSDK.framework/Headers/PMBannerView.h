@@ -8,11 +8,11 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "AdDelegate.h"
 
 @class ANAdRequestTargeting;
 @class AdRequest;
 @class SDKConfigs;
-@protocol AdDelegate;
 
 @protocol PMBannerViewDelegate;
 
@@ -49,17 +49,18 @@
  */
 @property (nonatomic, copy) NSString *adUnitId;
 
-
-/** @name Enabling Test Mode */
+/**
+ * The bidding ecpm rounded to the nearest decimal decided by the bidding interval.
+ * The bidding interval default is 0.01 and can be modified on the server at an adunit level.
+ * returns -1 if no ecpm is returned in the ad response
+ */
+@property (nonatomic, readonly) float biddingEcpm;
 
 /**
- * A Boolean value that determines whether the ad view should request ads in test mode.
- *
- * The default value is NO.
- * @warning **Important**: If you set this value to YES, make sure to reset it to NO before
- * submitting your application to the App Store.
- */
-@property (nonatomic, assign, getter = isTesting) BOOL testing;
+ * The bidding interval which decides what the biddingEcpm will finally be rounded to the nearest
+ * multiple of bidding interval
+ **/
+@property (nonatomic) float biddingInterval;
 
 /** @name Loading a Banner Ad */
 
