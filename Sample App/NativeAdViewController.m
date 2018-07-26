@@ -16,12 +16,13 @@
 #import "DFPNativeContentAdView.h"
 #import "PMBidder.h"
 
-@interface NativeAdViewController () <GADAdLoaderDelegate, GADNativeAppInstallAdLoaderDelegate, GADNativeContentAdLoaderDelegate>
+@interface NativeAdViewController () <GADAdLoaderDelegate, GADNativeAppInstallAdLoaderDelegate, GADNativeContentAdLoaderDelegate, GADBannerViewDelegate>
 
 @property (nonatomic, strong) PMNativeAd *nativeAd;
 @property (nonatomic, strong) PMBannerView *pmBannerView;
 
 @property (nonatomic, strong) GADAdLoader *adLoader;
+@property (nonatomic, strong) DFPBannerView *dfpBannerView;
 @property (nonatomic, strong) PMBidder *bidder;
 @end
 
@@ -36,16 +37,26 @@
     [_loadAdButton addTarget:self action:@selector(loadAd) forControlEvents:UIControlEventTouchUpInside];
     
     [self.indicator stopAnimating];
-    
+
     GADNativeAdImageAdLoaderOptions *options = [[GADNativeAdImageAdLoaderOptions alloc] init];
     options.disableImageLoading = NO;
     options.shouldRequestMultipleImages = NO;
     
+    //DFP Native Request
     self.adLoader = [[GADAdLoader alloc] initWithAdUnitID:dfp_adunit rootViewController:self adTypes:@[kGADAdLoaderAdTypeNativeAppInstall, kGADAdLoaderAdTypeNativeContent] options:@[options]];
-    
     self.adLoader.delegate = self;
     
+    //DFP Banner Request
+    //self.dfpBannerView = [[DFPBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+    //self.dfpBannerView.adUnitID = dfp_adunit;
+    //self.dfpBannerView.rootViewController = self;
+    //self.dfpBannerView.delegate = self;
+
+    //Polymorph HB Native request
     self.bidder = [[PMBidder alloc] initWithPMAdUnitID:pm_adunit];
+    
+    //Polymorph HB Banner request
+    //self.bidder = [[PMBidder alloc] initWithPMAdUnitID:pm_adunit];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,7 +70,12 @@
     [[self.adViewContainer subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     [self.indicator startAnimating];
+    
+    //DFP Native Request through Polymorph
     [self.bidder startWithAdLoader:self.adLoader viewController:self];
+    
+    //DFP Banner Request through Polymorph
+    //[self.bidder startWithBannerView:self.dfpBannerView viewController:self dfpRequest:[DFPRequest request] withBannerSize:CGSizeMake(320, 50)];
 }
 
 #pragma mark - <GADAdLoaderDelegate>
@@ -122,5 +138,29 @@
     [self.adViewContainer addSubview:nibView];
 }
 
+#pragma mark - <GADBannerViewDelegate>
+- (void)adViewDidReceiveAd:(GADBannerView *)bannerView
+{
+    [self.indicator stopAnimating];
+    [self.adViewContainer addSubview:bannerView];
+}
 
+- (void)adView:(GADBannerView *)bannerView didFailToReceiveAdWithError:(GADRequestError *)error
+{
+    NSLog(@"Banner ad request failed with error:%@",error);
+    [self.indicator stopAnimating];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Banner ad failed to load"
+                                                    message:@"Check console for more details"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    
+    [alert show];
+}
+
+- (void)adViewWillLeaveApplication:(GADBannerView *)bannerView
+{
+    NSLog(@"Banner ad about to leave application");
+}
 @end

@@ -49,6 +49,7 @@
 		5CDEF0201BC78C5E00C315D5 /* white_chocolate_donut.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5CDEF0101BC78C5E00C315D5 /* white_chocolate_donut.jpg */; };
 		5CDEF0271BC7C8A200C315D5 /* ANAdTableViewCellNew.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDEF0251BC7C8A200C315D5 /* ANAdTableViewCellNew.m */; };
 		5CDEF0281BC7C8A200C315D5 /* ANAdTableViewCellNew.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CDEF0261BC7C8A200C315D5 /* ANAdTableViewCellNew.xib */; };
+		5CF128EB2108A2BD00A8EDA9 /* PolymorphDFPBannerCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CF128EA2108A2BC00A8EDA9 /* PolymorphDFPBannerCustomEvent.m */; };
 		5CFD38671C4F472C007F5C08 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CFD38661C4F472C007F5C08 /* MediaPlayer.framework */; };
 		5CFD38691C4F4731007F5C08 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CFD38681C4F4731007F5C08 /* AVKit.framework */; };
 		5CFD38711C4FA28A007F5C08 /* AdsNativeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CFD38701C4FA28A007F5C08 /* AdsNativeSDK.framework */; };
@@ -124,6 +125,8 @@
 		5CDEF0241BC7C8A200C315D5 /* ANAdTableViewCellNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANAdTableViewCellNew.h; sourceTree = "<group>"; };
 		5CDEF0251BC7C8A200C315D5 /* ANAdTableViewCellNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANAdTableViewCellNew.m; sourceTree = "<group>"; };
 		5CDEF0261BC7C8A200C315D5 /* ANAdTableViewCellNew.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANAdTableViewCellNew.xib; sourceTree = "<group>"; };
+		5CF128E92108A2BC00A8EDA9 /* PolymorphDFPBannerCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolymorphDFPBannerCustomEvent.h; sourceTree = "<group>"; };
+		5CF128EA2108A2BC00A8EDA9 /* PolymorphDFPBannerCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PolymorphDFPBannerCustomEvent.m; sourceTree = "<group>"; };
 		5CFD38661C4F472C007F5C08 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		5CFD38681C4F4731007F5C08 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		5CFD38701C4FA28A007F5C08 /* AdsNativeSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AdsNativeSDK.framework; sourceTree = "<group>"; };
@@ -204,6 +207,8 @@
 			children = (
 				5CA2943C20FE0DE100DF4311 /* PMBidder.h */,
 				5CA2943F20FE0DE100DF4311 /* PMBidder.m */,
+				5CF128E92108A2BC00A8EDA9 /* PolymorphDFPBannerCustomEvent.h */,
+				5CF128EA2108A2BC00A8EDA9 /* PolymorphDFPBannerCustomEvent.m */,
 				5CA2943B20FE0DE100DF4311 /* PolymorphDFPNativeCustomEvent.h */,
 				5CA2943E20FE0DE100DF4311 /* PolymorphDFPNativeCustomEvent.m */,
 				5CA2944020FE0DE100DF4311 /* PolymorphDFPNativeAdAdapter.h */,
@@ -420,6 +425,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CA2945720FE0E1C00DF4311 /* DFPNativeContentAdView.m in Sources */,
+				5CF128EB2108A2BD00A8EDA9 /* PolymorphDFPBannerCustomEvent.m in Sources */,
 				5C01DBA41BC3044A00491F9B /* ANAdTableViewCell.m in Sources */,
 				5CBE8AAB1BA96D95000DBCFE /* AppDelegate.m in Sources */,
 				5C25A4C71BD0F7060025A3B3 /* NativeAdView.m in Sources */,
