@@ -1,5 +1,10 @@
+## Version 3.2.0
+-- **Update AdsNativeSDK Banner to support mediation**
+-- **Added DFP Header Bidding support for banner ads**
+
 ## Version 3.1.0
 -- **Added DFP Header Bidding support for native ads**
+
 ## Version 3.0.0
 -- **Banner support for the SDK added!**
 

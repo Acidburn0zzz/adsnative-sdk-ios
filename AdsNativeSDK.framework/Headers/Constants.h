@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
-#define AN_SDK_VERSION              @"3.2.0"
+#define AN_SDK_VERSION              @"3.2.1"
 
 #define AN_IOS_6_0 60000
 
@@ -23,9 +23,7 @@ enum {
 };
 typedef int PM_REQUEST_TYPE;
 
-// Sizing constants.
-extern CGSize const POLYMORPH_BANNER_SIZE;
-extern CGSize const POLYMORPH_MEDIUM_RECT_SIZE;
+
 
 extern const CGFloat kStarRatingUniversalScale;
 extern const CGFloat kMaxStarRatingValue;
@@ -33,3 +31,25 @@ extern const CGFloat kMinStarRatingValue;
 extern const NSTimeInterval kDefaultSecondsForImpression;
 extern const NSTimeInterval kUpdateCellVisibilityInterval;
 extern const NSString *backupClassPrefix;
+
+//Banner Sizes
+//320x50
+extern CGSize const kPMAdSizeMobileLeaderboard;
+//300x50
+extern CGSize const kPMAdSizeSmallMobileLeaderboard;
+//300x250
+extern CGSize const kPMAdSizeMediumRect;
+//728x90
+extern CGSize const kPMAdSizeLeaderboard;
+//970x250
+extern CGSize const kPMAdSizeBillboard;
+//160x600
+extern CGSize const kPMAdSizeWideSkyscraper;
+//120x600
+extern CGSize const kPMAdSizeSkyscraper;
+//300x100
+extern CGSize const kPMAdSizeRectangle;
+//300x600
+extern CGSize const kPMAdSizeHalfPage;
+//400x300
+extern CGSize const kPMAdSizeMining;
