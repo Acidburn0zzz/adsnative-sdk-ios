@@ -36,7 +36,7 @@
 
 - (void)startWithAdLoader:(GADAdLoader *)gAdLoader viewController:(UIViewController *)controller
 {
-    [self startWithAdLoader:gAdLoader viewController:controller dfpRequest:nil];
+    [self startWithAdLoader:gAdLoader viewController:controller dfpRequest:[DFPRequest request]];
 }
 
 - (void)startWithAdLoader:(GADAdLoader *)gAdLoader viewController:(UIViewController *)controller dfpRequest:(DFPRequest *)request
@@ -62,7 +62,7 @@
 
 - (void)startWithBannerView:(DFPBannerView *)dfpBannerView viewController:(UIViewController *)controller withBannerSize:(CGSize)bannerSize
 {
-    [self startWithBannerView:dfpBannerView viewController:controller dfpRequest:nil withBannerSize:bannerSize];
+    [self startWithBannerView:dfpBannerView viewController:controller dfpRequest:[DFPRequest request] withBannerSize:bannerSize];
 }
 
 - (void)startWithBannerView:(DFPBannerView *)dfpBannerView viewController:(UIViewController *)controller dfpRequest:(DFPRequest *)request withBannerSize:(CGSize)bannerSize
@@ -96,16 +96,12 @@
         NSString *ecpmAsString = [NSString stringWithFormat:@"%.2f", self.nativeAd.biddingEcpm];
         
         LogDebug(@"Making DFP request with ecpm: %@", ecpmAsString);
-        if (self.dfpRequest != NULL) {
-            if (self.dfpRequest.customTargeting != NULL) {
-                NSMutableDictionary *targeting = [[NSMutableDictionary alloc] initWithDictionary:self.dfpRequest.customTargeting];
-                [targeting setObject:ecpmAsString forKey:@"ecpm"];
-                self.dfpRequest.customTargeting = targeting;
-            } else {
-                self.dfpRequest.customTargeting = @{@"ecpm": ecpmAsString};
-            }
+        
+        if (self.dfpRequest.customTargeting != NULL) {
+            NSMutableDictionary *targeting = [[NSMutableDictionary alloc] initWithDictionary:self.dfpRequest.customTargeting];
+            [targeting setObject:ecpmAsString forKey:@"ecpm"];
+            self.dfpRequest.customTargeting = targeting;
         } else {
-            self.dfpRequest = [DFPRequest request];
             self.dfpRequest.customTargeting = @{@"ecpm": ecpmAsString};
         }
     } else {
@@ -118,7 +114,7 @@
 
 - (void)pmNativeAd:(PMNativeAd *)nativeAd didFailWithError:(NSError *)error
 {
-    [self.gAdLoader loadRequest:[DFPRequest request]];
+    [self.gAdLoader loadRequest:self.dfpRequest];
 }
 
 - (void)pmBannerAdDidLoad:(PMBannerView *)adView
@@ -130,16 +126,12 @@
         NSString *ecpmAsString = [NSString stringWithFormat:@"%.2f", self.pmBannerView.biddingEcpm];
         
         LogDebug(@"Making DFP request with ecpm: %@", ecpmAsString);
-        if (self.dfpRequest != NULL) {
-            if (self.dfpRequest.customTargeting != NULL) {
-                NSMutableDictionary *targeting = [[NSMutableDictionary alloc] initWithDictionary:self.dfpRequest.customTargeting];
-                [targeting setObject:ecpmAsString forKey:@"ecpm"];
-                self.dfpRequest.customTargeting = targeting;
-            } else {
-                self.dfpRequest.customTargeting = @{@"ecpm": ecpmAsString};
-            }
+        
+        if (self.dfpRequest.customTargeting != NULL) {
+            NSMutableDictionary *targeting = [[NSMutableDictionary alloc] initWithDictionary:self.dfpRequest.customTargeting];
+            [targeting setObject:ecpmAsString forKey:@"ecpm"];
+            self.dfpRequest.customTargeting = targeting;
         } else {
-            self.dfpRequest = [DFPRequest request];
             self.dfpRequest.customTargeting = @{@"ecpm": ecpmAsString};
         }
     } else {
@@ -150,7 +142,7 @@
 
 - (void)pmBannerAdDidFailToLoad:(PMBannerView *)view withError:(NSError *)error
 {
-    [self.dfpBannerView loadRequest:[DFPRequest request]];
+    [self.dfpBannerView loadRequest:self.dfpRequest];
 }
 
 - (UIViewController *)pmViewControllerForPresentingModalView {
