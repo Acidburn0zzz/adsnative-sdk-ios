@@ -75,7 +75,7 @@
     [self.bidder startWithAdLoader:self.adLoader viewController:self];
     
     //DFP Banner Request through Polymorph
-    //[self.bidder startWithBannerView:self.dfpBannerView viewController:self dfpRequest:[DFPRequest request] withBannerSize:CGSizeMake(320, 50)];
+    //[self.bidder startWithBannerView:self.dfpBannerView viewController:self dfpRequest:[DFPRequest request] withBannerSize:kPMAdSizeMobileLeaderboard];
 }
 
 #pragma mark - <GADAdLoaderDelegate>
