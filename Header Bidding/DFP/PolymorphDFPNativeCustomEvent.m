@@ -9,8 +9,6 @@
 #import "PolymorphDFPNativeCustomEvent.h"
 #import "PolymorphDFPNativeAdAdapter.h"
 
-NSString *const kPolymorphPlacementID = @"placementId";
-
 @interface PolymorphDFPNativeCustomEvent() <ANNativeAdDelegate>
 
 @property (nonatomic, strong) PMNativeAd *pmNativeAd;
@@ -21,8 +19,7 @@ NSString *const kPolymorphPlacementID = @"placementId";
 @implementation PolymorphDFPNativeCustomEvent
 
 - (void)requestNativeAdWithParameter:(NSString *)serverParameter request:(GADCustomEventRequest *)request adTypes:(NSArray *)adTypes options:(NSArray *)options rootViewController:(UIViewController *)rootViewController {
-    
-    
+
     PMNativeAd *cachedAd = [[PMPrefetchAds getInstance] getAd];
     if (cachedAd != nil) {
         [self anNativeAdDidLoad:cachedAd];
@@ -30,7 +27,7 @@ NSString *const kPolymorphPlacementID = @"placementId";
     } else {
         //if cached ad not present, then move on
         NSMutableDictionary* details = [NSMutableDictionary dictionary];
-        [details setValue:@"no cached Polymorph ad found" forKey:NSLocalizedDescriptionKey];
+        [details setValue:@"no cached Polymorph Native ad found" forKey:NSLocalizedDescriptionKey];
         [self.delegate customEventNativeAd:self didFailToLoadWithError:[NSError errorWithDomain:@"Polymorph" code:204 userInfo:details]];
     }
     
@@ -45,14 +42,10 @@ NSString *const kPolymorphPlacementID = @"placementId";
     return NO;
 }
 
-
-
-
 #pragma mark - <ANNativeAdDelegate>
 - (void)anNativeAdDidLoad:(PMNativeAd *)nativeAd
 {
     PolymorphDFPNativeAdAdapter *adAdapter = [[PolymorphDFPNativeAdAdapter alloc] initWithPMNativeAd:nativeAd];
-    
     [self.delegate customEventNativeAd:self didReceiveMediatedNativeAd:adAdapter];
 }
 

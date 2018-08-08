@@ -16,7 +16,7 @@
 #import "DFPNativeContentAdView.h"
 #import "PMBidder.h"
 
-@interface NativeAdViewController () <GADAdLoaderDelegate, GADNativeAppInstallAdLoaderDelegate, GADNativeContentAdLoaderDelegate, GADBannerViewDelegate>
+@interface NativeAdViewController () <GADAdLoaderDelegate, GADNativeAppInstallAdLoaderDelegate, GADNativeContentAdLoaderDelegate, GADBannerViewDelegate, DFPBannerAdLoaderDelegate>
 
 @property (nonatomic, strong) PMNativeAd *nativeAd;
 @property (nonatomic, strong) PMBannerView *pmBannerView;
@@ -37,13 +37,16 @@
     [_loadAdButton addTarget:self action:@selector(loadAd) forControlEvents:UIControlEventTouchUpInside];
     
     [self.indicator stopAnimating];
-
+    LogSetLevel(LogLevelDebug);
     GADNativeAdImageAdLoaderOptions *options = [[GADNativeAdImageAdLoaderOptions alloc] init];
     options.disableImageLoading = NO;
     options.shouldRequestMultipleImages = NO;
-    
+
     //DFP Native Request
     self.adLoader = [[GADAdLoader alloc] initWithAdUnitID:dfp_adunit rootViewController:self adTypes:@[kGADAdLoaderAdTypeNativeAppInstall, kGADAdLoaderAdTypeNativeContent] options:@[options]];
+
+    //DFP Native-Banner Request
+    //self.adLoader = [[GADAdLoader alloc] initWithAdUnitID:dfp_adunit rootViewController:self adTypes:@[kGADAdLoaderAdTypeNativeContent,kGADAdLoaderAdTypeDFPBanner, kGADAdLoaderAdTypeNativeAppInstall] options:@[options]];
     self.adLoader.delegate = self;
     
     //DFP Banner Request
@@ -51,12 +54,15 @@
     //self.dfpBannerView.adUnitID = dfp_adunit;
     //self.dfpBannerView.rootViewController = self;
     //self.dfpBannerView.delegate = self;
-
-    //Polymorph HB Native request
-    self.bidder = [[PMBidder alloc] initWithPMAdUnitID:pm_adunit];
     
-    //Polymorph HB Banner request
-    //self.bidder = [[PMBidder alloc] initWithPMAdUnitID:pm_adunit];
+    //Polymorph PMBidder init for Native
+    //self.bidder = [[PMBidder alloc] initWithPMAdUnitID:pm_adunit viewController:self requestType:PM_REQUEST_TYPE_NATIVE];
+
+    //Polymorph PMBidder init for Banner
+    //self.bidder = [[PMBidder alloc] initWithPMAdUnitID:pm_adunit viewController:self requestType:PM_REQUEST_TYPE_BANNER withBannerSize:kPMAdSizeMobileLeaderboard];
+
+    //Polymorph PMBidder init for Native-Banner
+    self.bidder = [[PMBidder alloc] initWithPMAdUnitID:pm_adunit viewController:self requestType:PM_REQUEST_TYPE_ALL withBannerSize:kPMAdSizeMobileLeaderboard];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,11 +77,11 @@
     
     [self.indicator startAnimating];
     
-    //DFP Native Request through Polymorph
-    [self.bidder startWithAdLoader:self.adLoader viewController:self];
-    
+    //DFP Native or Native-Banner Request through Polymorph
+    [self.bidder startWithAdLoader:self.adLoader];
+
     //DFP Banner Request through Polymorph
-    //[self.bidder startWithBannerView:self.dfpBannerView viewController:self dfpRequest:[DFPRequest request] withBannerSize:kPMAdSizeMobileLeaderboard];
+//    [self.bidder startWithBannerView:self.dfpBannerView];
 }
 
 #pragma mark - <GADAdLoaderDelegate>
@@ -162,5 +168,20 @@
 - (void)adViewWillLeaveApplication:(GADBannerView *)bannerView
 {
     NSLog(@"Banner ad about to leave application");
+}
+
+#pragma mark - <DFPBannerAdLoaderDelegate>
+- (NSArray<NSValue *> *)validBannerSizesForAdLoader:(GADAdLoader *)adLoader
+{
+    return @[
+             @(kGADAdSizeBanner)
+             ];
+}
+
+/// Tells the delegate that a DFP banner ad was received.
+- (void)adLoader:(GADAdLoader *)adLoader didReceiveDFPBannerView:(DFPBannerView *)bannerView
+{
+    [self.indicator stopAnimating];
+    [self.adViewContainer addSubview:bannerView];
 }
 @end
