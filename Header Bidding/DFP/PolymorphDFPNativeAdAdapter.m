@@ -11,6 +11,7 @@
 @interface PolymorphDFPNativeAdAdapter()
 
 @property (nonatomic, strong) PMNativeAd *pmNativeAd;
+@property (nonatomic, assign) BOOL isAppInstallAd;
 
 @end
 
@@ -20,6 +21,13 @@
 - (instancetype)initWithPMNativeAd:(PMNativeAd *)nativeAd {
     if (self = [super init]) {
         self.pmNativeAd = nativeAd;
+
+        self.isAppInstallAd = NO;
+
+        if ([[self.pmNativeAd nativeAssets] objectForKey:kNativeCTATextKey] != nil &&
+            [[self.pmNativeAd nativeAssets] objectForKey:kNativeIconImageKey] != nil) {
+            self.isAppInstallAd = YES;
+        }
     }
     
     return self;
@@ -66,7 +74,9 @@
     NSString *uri = [[self.pmNativeAd nativeAssets] objectForKey:kNativeIconImageKey];
     UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL:[NSURL URLWithString:uri]]];
     
-    return [[GADNativeAdImage alloc] initWithImage:image];
+    if (image != nil)
+        return [[GADNativeAdImage alloc] initWithImage:image];
+    return NULL;
 }
 
 //icon image for app ad
@@ -74,7 +84,9 @@
     NSString *uri = [[self.pmNativeAd nativeAssets] objectForKey:kNativeIconImageKey];
     UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL:[NSURL URLWithString:uri]]];
     
-    return [[GADNativeAdImage alloc] initWithImage:image];
+    if (image != nil)
+        return [[GADNativeAdImage alloc] initWithImage:image];
+    return NULL;
 }
 
 - (NSString *)price {
@@ -83,11 +95,29 @@
 
 - (NSDecimalNumber *)starRating {
     NSString *rating = [[self.pmNativeAd nativeAssets] objectForKey:kNativeStarRatingKey];
+    if (rating == nil)
+        return NULL;
     return [NSDecimalNumber decimalNumberWithString:rating];
 }
 
 - (NSString *)store {
     return NULL;
+}
+
+- (UIView *)adChoicesView {
+    return [[self.pmNativeAd nativeAssets] objectForKey:kNativeAdChoicesKey];
+}
+
+/// Media view.
+- (UIView *)mediaView {
+    return [[self.pmNativeAd nativeAssets] objectForKey:kNativeMediaViewKey];
+}
+
+/// Returns YES if the ad has video content.
+- (BOOL)hasVideoContent {
+    if ([[self.pmNativeAd nativeAssets] objectForKey:kNativeMediaViewKey] != nil)
+        return YES;
+    return NO;
 }
 
 #pragma mark - <GADMediatedNativeAdDelegate>
@@ -108,4 +138,10 @@ didRecordClickOnAssetWithName:(NSString *)assetName
     [self.pmNativeAd displayContentForURL:[NSURL URLWithString:landingURL] completion:nil];
 }
 
+#pragma mark - NSObject
+- (BOOL)conformsToProtocol:(Protocol *)aProtocol {
+    if (aProtocol == @protocol(GADMediatedNativeAppInstallAd))
+        return self.isAppInstallAd;
+    return [super conformsToProtocol:aProtocol];
+}
 @end

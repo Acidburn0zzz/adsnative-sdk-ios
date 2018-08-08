@@ -11,7 +11,7 @@
 
 @class PMNativeAd;
 
-@interface PolymorphDFPNativeAdAdapter : NSObject <GADMediatedNativeAd, GADMediatedNativeContentAd, GADMediatedNativeAppInstallAd, GADMediatedNativeAdDelegate>
+@interface PolymorphDFPNativeAdAdapter : NSObject <GADMediatedNativeContentAd, GADMediatedNativeAppInstallAd, GADMediatedNativeAdDelegate>
 
 - (instancetype)initWithPMNativeAd:(PMNativeAd *)nativeAd;
 

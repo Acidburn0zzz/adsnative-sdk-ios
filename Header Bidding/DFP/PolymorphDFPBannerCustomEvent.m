@@ -25,7 +25,7 @@
     } else {
         //if cached ad not present, then move on
         NSMutableDictionary* details = [NSMutableDictionary dictionary];
-        [details setValue:@"no cached Polymorph ad found" forKey:NSLocalizedDescriptionKey];
+        [details setValue:@"no cached Polymorph Banner ad found" forKey:NSLocalizedDescriptionKey];
         [self.delegate customEventBanner:self didFailAd:[NSError errorWithDomain:@"Polymorph" code:204 userInfo:details]];
     }
 }
