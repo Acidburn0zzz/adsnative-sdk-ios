@@ -49,6 +49,11 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="CTA"/>
                 </button>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="haf-sH-CAI" customClass="GADMediaView">
+                    <rect key="frame" x="8" y="86" width="300" height="118"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.98652541039999997" green="0.9280806882" blue="0.72644850189999999" alpha="1" colorSpace="calibratedRGB"/>
             <nil key="simulatedTopBarMetrics"/>
@@ -59,8 +64,9 @@
                 <outlet property="bodyView" destination="kxJ-Er-Wgz" id="NxR-JW-hNW"/>
                 <outlet property="callToActionView" destination="Qoe-zg-Imd" id="VYo-fq-MVS"/>
                 <outlet property="headlineView" destination="CFF-Ro-yFv" id="zR4-ba-baK"/>
-                <outlet property="imageView" destination="Zyw-6D-3cx" id="nRz-Uc-9fl"/>
+                <outlet property="imageView" destination="Zyw-6D-3cx" id="KI3-AA-jQ9"/>
                 <outlet property="logoView" destination="Ip1-MV-6qp" id="5bM-wI-b9V"/>
+                <outlet property="mediaView" destination="haf-sH-CAI" id="Cwp-og-7I6"/>
             </connections>
         </view>
     </objects>

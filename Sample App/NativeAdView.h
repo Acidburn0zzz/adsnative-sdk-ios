@@ -15,7 +15,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *summary;
 @property (strong, nonatomic) IBOutlet UIButton *cta;
 @property (strong, nonatomic) IBOutlet UIImageView *iconImage;
-@property (strong, nonatomic) IBOutlet UIImageView *mainImage;
 @property (strong, nonatomic) IBOutlet UILabel *sponsoredText;
 
 @property (strong, nonatomic) IBOutlet UIView *mediaView;

@@ -31,8 +31,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSString *pm_adunit = @"ping";
-    NSString *dfp_adunit = @"dfp_ping";
+    NSString *pm_adunit = @"pm_adunit";
+    NSString *dfp_adunit = @"dfp_adunit";
  
     [_loadAdButton addTarget:self action:@selector(loadAd) forControlEvents:UIControlEventTouchUpInside];
     
@@ -55,14 +55,9 @@
     //self.dfpBannerView.rootViewController = self;
     //self.dfpBannerView.delegate = self;
     
-    //Polymorph PMBidder init for Native
-    //self.bidder = [[PMBidder alloc] initWithPMAdUnitID:pm_adunit viewController:self requestType:PM_REQUEST_TYPE_NATIVE];
 
-    //Polymorph PMBidder init for Banner
-    //self.bidder = [[PMBidder alloc] initWithPMAdUnitID:pm_adunit viewController:self requestType:PM_REQUEST_TYPE_BANNER withBannerSize:kPMAdSizeMobileLeaderboard];
-
-    //Polymorph PMBidder init for Native-Banner
-    self.bidder = [[PMBidder alloc] initWithPMAdUnitID:pm_adunit viewController:self requestType:PM_REQUEST_TYPE_ALL withBannerSize:kPMAdSizeMobileLeaderboard];
+    //Polymorph PMBidder init
+    self.bidder = [[PMBidder alloc] initWithPMAdUnitID:pm_adunit];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -77,11 +72,15 @@
     
     [self.indicator startAnimating];
     
-    //DFP Native or Native-Banner Request through Polymorph
-    [self.bidder startWithAdLoader:self.adLoader];
-
+    //DFP Native Request through Polymorph
+    [self.bidder startWithAdLoader:self.adLoader viewController:self];
+    
+    //DFP Native-Banner Request through Polymorph
+    //[self.bidder startWithAdLoader:self.adLoader viewController:self withBannerSize:kPMAdSizeMobileLeaderboard];
+    
     //DFP Banner Request through Polymorph
-//    [self.bidder startWithBannerView:self.dfpBannerView];
+    //[self.bidder startWithBannerView:self.dfpBannerView viewController:self withBannerSize:kPMAdSizeMobileLeaderboard];
+    
 }
 
 #pragma mark - <GADAdLoaderDelegate>
@@ -114,6 +113,9 @@
     
     GADNativeAdImage *firstImage = nativeAppInstallAd.images.firstObject;
     ((UIImageView *)nibView.imageView).image = firstImage.image;
+    //important if both GADMediaView and imageview are accepted
+    [nibView bringSubviewToFront:nibView.imageView];
+    
     ((UIImageView *)nibView.iconView).image = nativeAppInstallAd.icon.image;
     
     nibView.callToActionView.userInteractionEnabled = NO;
@@ -137,6 +139,9 @@
     
     GADNativeAdImage *firstImage = nativeContentAd.images.firstObject;
     ((UIImageView *)nibView.imageView).image = firstImage.image;
+    //important if both GADMediaView and imageview are accepted
+    [nibView bringSubviewToFront:nibView.imageView];
+    
     ((UIImageView *)nibView.logoView).image = nativeContentAd.logo.image;
     
     nibView.callToActionView.userInteractionEnabled = NO;
