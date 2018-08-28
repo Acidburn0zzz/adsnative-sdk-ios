@@ -12,7 +12,6 @@
 @property (nonatomic, strong) PMNativeAd *nativeAd;
 @property (nonatomic, strong) PMClass *pmClass;
 @property (nonatomic, strong) PMBannerView *pmBannerView;
-@property (nonatomic, strong) ANAdRequestTargeting *targeting;
 
 @property (nonatomic, strong) GADAdLoader *gAdLoader;
 @property (nonatomic, strong) DFPRequest *dfpRequest;
@@ -22,81 +21,99 @@
 @property (nonnull, strong) DFPBannerView *dfpBannerView;
 
 @property (nonatomic, strong) UIViewController *controller;
-@property (nonatomic, assign) PM_REQUEST_TYPE requestType;
 @end
 
 static NSString *EcpmKey = @"ecpm";
 
 @implementation PMBidder
 
-#pragma mark - Init for Native Ads
-- (instancetype)initWithPMAdUnitID:(NSString *)adUnitID viewController:(UIViewController *)controller requestType:(PM_REQUEST_TYPE)requestType
-{
-    return [self initWithPMAdUnitID:adUnitID viewController:controller requestType:requestType withBannerSize:CGSizeMake(0, 0)];
-}
-
-#pragma mark - Init for Banner and Native-Banner Ads
-- (instancetype)initWithPMAdUnitID:(NSString *)adUnitID viewController:(UIViewController *)controller requestType:(PM_REQUEST_TYPE)requestType withBannerSize:(CGSize)bannerSize
+- (instancetype)initWithPMAdUnitID:(NSString *)adUnitID
 {
     self = [super init];
-    if (self) {
-        self.pmAdUnitID = adUnitID;
-        self.controller = controller;
-        self.requestType = requestType;
-
-        //Initialize the PM SDK
-        self.pmClass = [[PMClass alloc] initWithAdUnitID:self.pmAdUnitID requestType:self.requestType withBannerSize:bannerSize];
-        self.pmClass.delegate = self;
-        //Disable banner refresh
-        if (self.requestType == PM_REQUEST_TYPE_BANNER)
-            [self.pmClass stopAutomaticallyRefreshingContents];
-
-        //Set PM targeting
-        self.targeting = [ANAdRequestTargeting targeting];
-        NSMutableArray *keywords = [[NSMutableArray alloc] init];
-        [keywords addObject:@"&hb=1"];
-        self.targeting.keywords = keywords;
-    }
+    self.pmAdUnitID = adUnitID;
+    
     return self;
 }
 
-#pragma mark - Native and Native-Banner Ad Call
-- (void)startWithAdLoader:(GADAdLoader *)gAdLoader
+# pragma mark - Native Methods
+- (void)startWithAdLoader:(GADAdLoader *)gAdLoader viewController:(UIViewController *)controller
 {
-    [self startWithAdLoader:gAdLoader dfpRequest:[DFPRequest request]];
+    [self startWithAdLoader:gAdLoader viewController:controller dfpRequest:[DFPRequest request]];
 }
 
-- (void)startWithAdLoader:(GADAdLoader *)gAdLoader dfpRequest:(DFPRequest *)request
+- (void)startWithAdLoader:(GADAdLoader *)gAdLoader viewController:(UIViewController *)controller dfpRequest:(DFPRequest *)request
 {
-    assert((self.requestType == PM_REQUEST_TYPE_NATIVE) ||  (self.requestType == PM_REQUEST_TYPE_ALL));
-
     self.gAdLoader = gAdLoader;
+    self.controller = controller;
     self.dfpRequest = request;
     
     //clear PM ad cache before making a fresh request
     [[PMPrefetchAds getInstance] clearCache];
-
-    [self.pmClass loadPMAdWithTargeting:self.targeting];
+    
+    self.pmClass = [[PMClass alloc] initWithAdUnitID:self.pmAdUnitID requestType:PM_REQUEST_TYPE_NATIVE withBannerSize:CGSizeMake(0,0)];
+    self.pmClass.delegate = self;
+    
+    ANAdRequestTargeting *targeting = [ANAdRequestTargeting targeting];
+    NSMutableArray *keywords = [[NSMutableArray alloc] init];
+    [keywords addObject:@"&hb=1"];
+    targeting.keywords = keywords;
+    
+    [self.pmClass loadPMAdWithTargeting:targeting];
+    
 }
 
-#pragma mark - Banner Ad Call
+#pragma mark - Banner Methods
 
-- (void)startWithBannerView:(DFPBannerView *)dfpBannerView
+- (void)startWithBannerView:(DFPBannerView *)dfpBannerView viewController:(UIViewController *)controller withBannerSize:(CGSize)bannerSize
 {
-    [self startWithBannerView:dfpBannerView dfpRequest:[DFPRequest request]];
+    [self startWithBannerView:dfpBannerView viewController:controller dfpRequest:[DFPRequest request] withBannerSize:bannerSize];
 }
 
-- (void)startWithBannerView:(DFPBannerView *)dfpBannerView dfpRequest:(DFPRequest *)request
+- (void)startWithBannerView:(DFPBannerView *)dfpBannerView viewController:(UIViewController *)controller dfpRequest:(DFPRequest *)request withBannerSize:(CGSize)bannerSize
 {
-    assert(self.requestType == PM_REQUEST_TYPE_BANNER);
-
     self.dfpBannerView = dfpBannerView;
+    self.controller = controller;
     self.dfpRequest = request;
     
     //clear PM ad cache before making a fresh request
     [[PMPrefetchAds getInstance] clearCache];
     
-    [self.pmClass loadPMAdWithTargeting:self.targeting];
+    self.pmClass = [[PMClass alloc] initWithAdUnitID:self.pmAdUnitID requestType:PM_REQUEST_TYPE_BANNER withBannerSize:bannerSize];
+    [self.pmClass stopAutomaticallyRefreshingContents];
+    self.pmClass.delegate = self;
+    
+    ANAdRequestTargeting *targeting = [ANAdRequestTargeting targeting];
+    NSMutableArray *keywords = [[NSMutableArray alloc] init];
+    [keywords addObject:@"&hb=1"];
+    targeting.keywords = keywords;
+    
+    [self.pmClass loadPMAdWithTargeting:targeting];
+}
+
+#pragma mark - Native-Banner Methods
+- (void)startWithAdLoader:(GADAdLoader *)gAdLoader viewController:(UIViewController *)controller withBannerSize:(CGSize)bannerSize
+{
+    [self startWithAdLoader:gAdLoader viewController:controller dfpRequest:[DFPRequest request] withBannerSize:bannerSize];
+}
+
+- (void)startWithAdLoader:(GADAdLoader *)gAdLoader viewController:(UIViewController *)controller dfpRequest:(DFPRequest *)request withBannerSize:(CGSize)bannerSize
+{
+    self.gAdLoader = gAdLoader;
+    self.controller = controller;
+    self.dfpRequest = request;
+    
+    //clear PM ad cache before making a fresh request
+    [[PMPrefetchAds getInstance] clearCache];
+    
+    self.pmClass = [[PMClass alloc] initWithAdUnitID:self.pmAdUnitID requestType:PM_REQUEST_TYPE_ALL withBannerSize:bannerSize];
+    self.pmClass.delegate = self;
+    
+    ANAdRequestTargeting *targeting = [ANAdRequestTargeting targeting];
+    NSMutableArray *keywords = [[NSMutableArray alloc] init];
+    [keywords addObject:@"&hb=1"];
+    targeting.keywords = keywords;
+    
+    [self.pmClass loadPMAdWithTargeting:targeting];
 }
 
 #pragma mark - <PMCLassDelegate>
@@ -107,12 +124,12 @@ static NSString *EcpmKey = @"ecpm";
     
     if ([nativeAd.nativeAssets objectForKey:kNativeEcpmKey] != nil) {
         NSString *ecpmAsString = [NSString stringWithFormat:@"%.2f", self.nativeAd.biddingEcpm];
-        
+
         LogDebug(@"Making DFP request with ecpm: %@", ecpmAsString);
         
         NSMutableDictionary *targeting = [NSMutableDictionary dictionaryWithDictionary:(self.dfpRequest.customTargeting ? self.dfpRequest.customTargeting : @{})];
         [targeting setObject:ecpmAsString forKey:EcpmKey];
-
+        
         self.dfpRequest.customTargeting = targeting;
     } else {
         LogDebug(@"Ecpm not present in Polymorph response. Loading default DFP ad.");
@@ -139,7 +156,7 @@ static NSString *EcpmKey = @"ecpm";
         
         NSMutableDictionary *targeting = [NSMutableDictionary dictionaryWithDictionary:(self.dfpRequest.customTargeting ? self.dfpRequest.customTargeting : @{})];
         [targeting setObject:ecpmAsString forKey:EcpmKey];
-
+        
         self.dfpRequest.customTargeting = targeting;
     } else {
         LogDebug(@"Ecpm not present in Polymorph response. Loading default DFP ad.");

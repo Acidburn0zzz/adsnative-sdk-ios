@@ -14,6 +14,8 @@ static const NSInteger FacebookNoFillErrorCode = 1001;
 @interface FacebookNativeCustomEvent () <FBNativeAdDelegate>
 
 @property (nonatomic, readwrite, strong) FBNativeAd *fbNativeAd;
+@property (nonatomic, strong) NSDictionary *info;
+
 
 @end
 
@@ -24,6 +26,7 @@ static const NSInteger FacebookNoFillErrorCode = 1001;
     NSString *placementID = [info objectForKey:@"placementId"];
     
     if (placementID) {
+        self.info = info;
         _fbNativeAd = [[FBNativeAd alloc] initWithPlacementID:placementID];
         self.fbNativeAd.delegate = self;
         [self.fbNativeAd loadAd];
@@ -36,27 +39,10 @@ static const NSInteger FacebookNoFillErrorCode = 1001;
 
 - (void)nativeAdDidLoad:(FBNativeAd *)nativeAd
 {
-    FacebookNativeAdAdapter *adAdapter = [[FacebookNativeAdAdapter alloc] initWithFBNativeAd:nativeAd];
+    FacebookNativeAdAdapter *adAdapter = [[FacebookNativeAdAdapter alloc] initWithFBNativeAd:nativeAd withInfo:self.info];
+    
     PMNativeAd *interfaceAd = [[PMNativeAd alloc] initWithAdAdapter:adAdapter];
-    
-    NSMutableArray *imageURLs = [NSMutableArray array];
-    
-    if (nativeAd.icon.url) {
-        [imageURLs addObject:nativeAd.icon.url];
-    }
-    
-    if (nativeAd.coverImage.url) {
-        [imageURLs addObject:nativeAd.coverImage.url];
-    }
-    
-    [super precacheImagesWithURLs:imageURLs completionBlock:^(NSArray *errors) {
-        if (errors) {
-            LogDebug(@"%@", errors);
-            [self.delegate nativeCustomEvent:self didFailToLoadAdWithError: AdNSErrorForImageDownloadFailure()];
-        } else {
-            [self.delegate nativeCustomEvent:self didLoadAd:interfaceAd];
-        }
-    }];
+    [self.delegate nativeCustomEvent:self didLoadAd:interfaceAd];
 }
 
 - (void)nativeAd:(FBNativeAd *)nativeAd didFailWithError:(NSError *)error

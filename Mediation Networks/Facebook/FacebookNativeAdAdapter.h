@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 AdsNative. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <FBAudienceNetwork/FBAudienceNetwork.h>
 #import <AdsNativeSDK/AdsNativeSDK.h>
 
@@ -16,6 +15,6 @@
 
 @property (nonatomic, weak) id<AdAdapterDelegate> delegate;
 
-- (instancetype)initWithFBNativeAd:(FBNativeAd *)fbNativeAd;
+- (instancetype)initWithFBNativeAd:(FBNativeAd *)fbNativeAd withInfo:(NSDictionary *)info;
 
 @end

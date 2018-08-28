@@ -12,6 +12,9 @@
 
 @property (nonatomic, readonly, strong) FBNativeAd *fbNativeAd;
 
+@property (nonatomic, strong) FBAdIconView *iconImageView;
+@property (nonatomic, strong) FBMediaView *fbMediaView;
+
 @end
 
 @implementation FacebookNativeAdAdapter
@@ -20,49 +23,27 @@
 @synthesize defaultClickThroughURL = _defaultClickThroughURL;
 @synthesize isBackupClassRequired = _isBackupClassRequired;
 
-- (instancetype)initWithFBNativeAd:(FBNativeAd *)fbNativeAd
+- (instancetype)initWithFBNativeAd:(FBNativeAd *)fbNativeAd withInfo:(NSDictionary *)info
 {
     if (self = [super init]) {
         _fbNativeAd = fbNativeAd;
         _fbNativeAd.delegate = self;
         
-        NSNumber *starRating = nil;
-        
-        // Normalize star rating to 5 stars.
-        if (fbNativeAd.starRating.scale != 0) {
-            CGFloat ratio = 0.0f;
-            ratio = kStarRatingUniversalScale/fbNativeAd.starRating.scale;
-            starRating = [NSNumber numberWithFloat:ratio*fbNativeAd.starRating.value];
-        }
-        
         NSMutableDictionary *nativeAssets = [NSMutableDictionary dictionary];
         
-        if (starRating) {
-            [nativeAssets setObject:starRating forKey:kNativeStarRatingKey];
+        if (fbNativeAd.headline) {
+            [nativeAssets setObject:fbNativeAd.headline forKey:kNativeTitleKey];
         }
-        
-        if (fbNativeAd.title) {
-            [nativeAssets setObject:fbNativeAd.title forKey:kNativeTitleKey];
-        }
-        
-        if (fbNativeAd.body) {
-            [nativeAssets setObject:fbNativeAd.body forKey:kNativeTextKey];
+
+        if (fbNativeAd.bodyText) {
+            [nativeAssets setObject:fbNativeAd.bodyText forKey:kNativeTextKey];
         }
         
         if (fbNativeAd.callToAction) {
             [nativeAssets setObject:fbNativeAd.callToAction forKey:kNativeCTATextKey];
         }
-        
-        if (fbNativeAd.icon.url.absoluteString) {
-            [nativeAssets setObject:fbNativeAd.icon.url.absoluteString forKey:kNativeIconImageKey];
-        }
-        
-        if (fbNativeAd.coverImage.url.absoluteString) {
-            [nativeAssets setObject:fbNativeAd.coverImage.url.absoluteString forKey:kNativeMainImageKey];
-        }
-        
+    
         NSMutableDictionary *customAssets = [[NSMutableDictionary alloc] init];
-        
         if (fbNativeAd.placementID) {
             [customAssets setObject:fbNativeAd.placementID forKey:@"placementID"];
         }
@@ -75,14 +56,29 @@
             [nativeAssets setObject:customAssets forKey:kNativeCustomAssetsKey];
         }
         
-        //For video ads
-        FBMediaView *mediaView = [[FBMediaView alloc] initWithNativeAd:fbNativeAd];
+        if (fbNativeAd.advertiserName) {
+            [nativeAssets setObject:fbNativeAd.advertiserName forKey:kNativeSponsoredKey];
+        }
+        
+        if ([info objectForKey:kNativeEcpmKey] != nil) {
+            [nativeAssets setObject:[info objectForKey:kNativeEcpmKey] forKey:kNativeEcpmKey];
+        }
+
+        self.iconImageView = [[FBAdIconView alloc] init];
+        [nativeAssets setObject:self.iconImageView forKey:kNativeIconImageKey];
+        
+        [nativeAssets setObject:@"Sponsored By" forKey:kNativeSponsoredByTagKey];
+        
+        //For FB cover/main/carousell images and video ads
+        FBMediaView *mediaView = [[FBMediaView alloc] init];
         [nativeAssets setObject:mediaView forKey:kNativeMediaViewKey];
         
-        [nativeAssets setObject:@"Sponsored" forKey:kNativeSponsoredByTagKey];
-        
         //Ad Choices View
-        [nativeAssets setObject:[[FBAdChoicesView alloc] initWithNativeAd:fbNativeAd] forKey:kNativeAdChoicesKey];
+        FBAdChoicesView *adChoicesView = [[FBAdChoicesView alloc] init];
+        adChoicesView.nativeAd = fbNativeAd;
+        adChoicesView.rootViewController = nil;
+        adChoicesView.corner = UIRectCornerTopRight;
+        [nativeAssets setObject:adChoicesView forKey:kNativeAdChoicesKey];
         
         _nativeAssets = nativeAssets;
     }
@@ -118,7 +114,7 @@
 
 - (void)willAttachToView:(UIView *)view
 {
-    [self.fbNativeAd registerViewForInteraction:view withViewController:[self.delegate viewControllerToPresentModalView]];
+    [self.fbNativeAd registerViewForInteraction:view mediaView:[self.nativeAssets objectForKey:kNativeMediaViewKey] iconView:self.iconImageView viewController:[self.delegate viewControllerToPresentModalView]];
 }
 - (void)didDetachFromView:(UIView *)view
 {
@@ -135,7 +131,6 @@
     } else {
         LogWarn(@"Delegate does not implement click tracking callback. Clicks likely not being tracked.");
     }
-    
 }
 
 - (void)nativeAdWillLogImpression:(FBNativeAd *)nativeAd
