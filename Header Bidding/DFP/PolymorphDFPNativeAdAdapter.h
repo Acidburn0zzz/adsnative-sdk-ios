@@ -13,6 +13,6 @@
 
 @interface PolymorphDFPNativeAdAdapter : NSObject <GADMediatedNativeContentAd, GADMediatedNativeAppInstallAd, GADMediatedNativeAdDelegate>
 
-- (instancetype)initWithPMNativeAd:(PMNativeAd *)nativeAd;
+- (instancetype)initWithPMNativeAd:(PMNativeAd *)nativeAd viewController:(UIViewController *)viewController;
 
 @end

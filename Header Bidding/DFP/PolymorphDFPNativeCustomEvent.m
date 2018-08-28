@@ -9,9 +9,11 @@
 #import "PolymorphDFPNativeCustomEvent.h"
 #import "PolymorphDFPNativeAdAdapter.h"
 
-@interface PolymorphDFPNativeCustomEvent() <ANNativeAdDelegate>
+NSString *const kPolymorphPlacementID = @"placementId";
 
-@property (nonatomic, strong) PMNativeAd *pmNativeAd;
+@interface PolymorphDFPNativeCustomEvent()
+
+@property (nonatomic, weak) UIViewController *viewController;
 
 @end
 
@@ -19,9 +21,10 @@
 @implementation PolymorphDFPNativeCustomEvent
 
 - (void)requestNativeAdWithParameter:(NSString *)serverParameter request:(GADCustomEventRequest *)request adTypes:(NSArray *)adTypes options:(NSArray *)options rootViewController:(UIViewController *)rootViewController {
-
+    
     PMNativeAd *cachedAd = [[PMPrefetchAds getInstance] getAd];
     if (cachedAd != nil) {
+        self.viewController = rootViewController;
         [self anNativeAdDidLoad:cachedAd];
         
     } else {
@@ -34,27 +37,19 @@
 }
 
 - (BOOL)handlesUserClicks {
-    return NO;
+    return YES;
 }
 
 
 - (BOOL)handlesUserImpressions {
-    return NO;
+    return YES;
 }
 
-#pragma mark - <ANNativeAdDelegate>
 - (void)anNativeAdDidLoad:(PMNativeAd *)nativeAd
 {
-    PolymorphDFPNativeAdAdapter *adAdapter = [[PolymorphDFPNativeAdAdapter alloc] initWithPMNativeAd:nativeAd];
+    PolymorphDFPNativeAdAdapter *adAdapter = [[PolymorphDFPNativeAdAdapter alloc] initWithPMNativeAd:nativeAd viewController:self.viewController];
     [self.delegate customEventNativeAd:self didReceiveMediatedNativeAd:adAdapter];
 }
-
-- (void)anNativeAd:(PMNativeAd *)nativeAd didFailWithError:(NSError *)error
-{
-    LogDebug(@"Polymorph failed to load with error: %@", error.description);
-    [self.delegate customEventNativeAd:self didFailToLoadWithError:error];
-}
-
 
 @end
 
