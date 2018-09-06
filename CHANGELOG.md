@@ -1,3 +1,14 @@
+## Version 3.2.3
+-- **Added support for PMAdChoicesView**
+-- **Exposed pmNativeAdWillLeaveApplication as a delegate callback**
+-- **DFP HB update for passing PMAdchoicesView**
+
+## Version 3.2.2
+-- **Added support for the latest FB SDK (v 4.99.3)**
+-- **Updated PM SDK for FB header bidding support with via DFP**
+-- **Bug fix during url encoding**
+-- **Updated DFP Header Bidding files to support FB mediated via Polymorph**
+
 ## Version 3.2.1
 -- **Performance and Stability improvements**
 
