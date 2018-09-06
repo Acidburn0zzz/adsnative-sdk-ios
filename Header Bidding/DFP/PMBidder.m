@@ -71,6 +71,7 @@ static NSString *EcpmKey = @"ecpm";
 
 - (void)startWithBannerView:(DFPBannerView *)dfpBannerView viewController:(UIViewController *)controller dfpRequest:(DFPRequest *)request withBannerSize:(CGSize)bannerSize
 {
+    self.gAdLoader = nil;
     self.dfpBannerView = dfpBannerView;
     self.controller = controller;
     self.dfpRequest = request;
@@ -81,6 +82,7 @@ static NSString *EcpmKey = @"ecpm";
     self.pmClass = [[PMClass alloc] initWithAdUnitID:self.pmAdUnitID requestType:PM_REQUEST_TYPE_BANNER withBannerSize:bannerSize];
     [self.pmClass stopAutomaticallyRefreshingContents];
     self.pmClass.delegate = self;
+    self.pmClass.requestDelayedAd = YES;
     
     ANAdRequestTargeting *targeting = [ANAdRequestTargeting targeting];
     NSMutableArray *keywords = [[NSMutableArray alloc] init];
@@ -107,6 +109,7 @@ static NSString *EcpmKey = @"ecpm";
     
     self.pmClass = [[PMClass alloc] initWithAdUnitID:self.pmAdUnitID requestType:PM_REQUEST_TYPE_ALL withBannerSize:bannerSize];
     self.pmClass.delegate = self;
+    self.pmClass.requestDelayedAd = YES;
     
     ANAdRequestTargeting *targeting = [ANAdRequestTargeting targeting];
     NSMutableArray *keywords = [[NSMutableArray alloc] init];
@@ -124,7 +127,6 @@ static NSString *EcpmKey = @"ecpm";
     
     if ([nativeAd.nativeAssets objectForKey:kNativeEcpmKey] != nil) {
         NSString *ecpmAsString = [NSString stringWithFormat:@"%.2f", self.nativeAd.biddingEcpm];
-
         LogDebug(@"Making DFP request with ecpm: %@", ecpmAsString);
         
         NSMutableDictionary *targeting = [NSMutableDictionary dictionaryWithDictionary:(self.dfpRequest.customTargeting ? self.dfpRequest.customTargeting : @{})];
@@ -161,12 +163,21 @@ static NSString *EcpmKey = @"ecpm";
     } else {
         LogDebug(@"Ecpm not present in Polymorph response. Loading default DFP ad.");
     }
-    [self.dfpBannerView loadRequest:self.dfpRequest];
+    
+    if (self.gAdLoader != nil) {
+        [self.gAdLoader loadRequest:self.dfpRequest];
+    } else {
+        [self.dfpBannerView loadRequest:self.dfpRequest];
+    }
 }
 
 - (void)pmBannerAdDidFailToLoad:(PMBannerView *)view withError:(NSError *)error
 {
-    [self.dfpBannerView loadRequest:self.dfpRequest];
+    if (self.gAdLoader != nil) {
+        [self.dfpBannerView loadRequest:self.dfpRequest];
+    } else {
+        [self.dfpBannerView loadRequest:self.dfpRequest];
+    }
 }
 
 - (UIViewController *)pmViewControllerForPresentingModalView {

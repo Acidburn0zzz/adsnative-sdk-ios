@@ -32,4 +32,9 @@
  */
 - (BOOL)anNativeAdDidClick:(PMNativeAd *)nativeAd;
 
+/**
+ * Tells the delegate when the ad is about to leave the application (usually on ad click or adchoices icon click)
+ */
+- (void)anNativeAdWillLeaveApplication;
+
 @end

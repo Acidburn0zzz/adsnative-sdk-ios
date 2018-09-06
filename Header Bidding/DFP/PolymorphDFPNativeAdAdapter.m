@@ -24,7 +24,7 @@
         self.pmNativeAd = nativeAd;
         self.pmNativeAd.internalDelegate = self;
         self.viewController = viewController;
-
+        
         self.isAppInstallAd = NO;
         
         if ([[self.pmNativeAd nativeAssets] objectForKey:kNativeCTATextKey] != nil &&
@@ -87,7 +87,7 @@
         NSURL *imageURL = [NSURL URLWithString:[[self.pmNativeAd nativeAssets] objectForKey:kNativeIconImageKey]];
         image = [UIImage imageWithData: [NSData dataWithContentsOfURL:imageURL]];
     }
-
+    
     if (image != nil)
         return [[GADNativeAdImage alloc] initWithImage:image];
     return NULL;
@@ -115,7 +115,7 @@
         NSURL *imageURL = [NSURL URLWithString:[[self.pmNativeAd nativeAssets] objectForKey:kNativeIconImageKey]];
         image = [UIImage imageWithData: [NSData dataWithContentsOfURL:imageURL]];
     }
-
+    
     if (image != nil)
         return [[GADNativeAdImage alloc] initWithImage:image];
     return NULL;
@@ -142,7 +142,13 @@
 
 /// Media view.
 - (UIView *)mediaView {
-    return [[self.pmNativeAd nativeAssets] objectForKey:kNativeMediaViewKey];
+    if ([self.pmNativeAd.providerName isEqualToString:@"adsnative"]) {
+        UIView *mediaView = [[UIView alloc] init];
+        [self.pmNativeAd loadMediaIntoView:mediaView];
+        return mediaView;
+    } else {
+        return [[self.pmNativeAd nativeAssets] objectForKey:kNativeMediaViewKey];
+    }
 }
 
 /// Returns YES if the ad has video content.
@@ -159,7 +165,7 @@
      clickableAssetViews:(NSDictionary<NSString *, UIView *> *)clickableAssetViews
   nonclickableAssetViews:(NSDictionary<NSString *, UIView *> *)nonclickableAssetViews
           viewController:(UIViewController *)viewController {
-
+    
     if([view isKindOfClass:[GADNativeAppInstallAdView class]] && [[[self.pmNativeAd nativeAssets] objectForKey:kNativeIconImageKey] isKindOfClass:[UIView class]]) {
         GADNativeAppInstallAdView *v = (GADNativeAppInstallAdView *)view;
         UIView *imageView = [[self.pmNativeAd nativeAssets] objectForKey:kNativeIconImageKey];
@@ -173,6 +179,7 @@
         [v.logoView addSubview:imageView];
         [v.logoView bringSubviewToFront:imageView];
     }
+    
     [self.pmNativeAd registerNativeAdForView:view];
 }
 
@@ -194,6 +201,11 @@
 {
     [GADMediatedNativeAdNotificationSource mediatedNativeAdDidRecordClick:self];
     return NO;
+}
+
+- (void)anNativeAdWillLeaveApplication
+{
+    [GADMediatedNativeAdNotificationSource mediatedNativeAdWillLeaveApplication:self];
 }
 
 - (UIViewController *)viewControllerToPresentAdModalView {
