@@ -57,10 +57,23 @@
 @property (nonatomic, readonly) float biddingEcpm;
 
 /**
+ * This is set when you want PM banner ads to not be rendered into webview immediately. This is
+ * done in case you don't want impressions to be tracked immediately upon successful ad response.
+ * If this is set, PMBannerViews' `renderDelayedAd` needs to be called to render the ad into view.
+ */
+@property (nonatomic, assign) BOOL requestDelayedAd;
+
+/**
  * The bidding interval which decides what the biddingEcpm will finally be rounded to the nearest
  * multiple of bidding interval
  **/
 @property (nonatomic) float biddingInterval;
+
+/*
+ * Gets set only for PM banner ads and if making a delayed ad call using PMClass. This will get reset to NO if `renderDelayedAd` is
+ * called following which the `adViewDidRenderAd:` callback gets fired.
+ */
+@property (nonatomic, assign) BOOL isUnRenderedPMAd;
 
 /** @name Loading a Banner Ad */
 
@@ -71,6 +84,14 @@
  * if you would like cancel any existing ad requests and force a new ad to load.
  */
 - (void)loadAd;
+
+/*
+ * Renders the ad into UIWebView. This is done incase you want to delay firing impressions. If you call loadAd
+ * instead, then impression trackers get fired as soon as a valid ad is fetched from the PM server. This method works
+ * for PM banner ads and not third-party SDK mediated ones. For mediated ads, their impression trackers fire on successful
+ * ad response.
+ */
+- (void)renderDelayedAd;
 
 /**
  * Requests a new ad from the Polymorph ad server with targeting parameters set.
@@ -192,8 +213,20 @@
  */
 - (void)willLeaveApplicationFromAd:(PMBannerView *)view;
 
+/**
+ * Sent when an ad view successfully renders an ad.
+ *
+ * Your implementation of this method should insert the ad view into the view hierarchy, if you
+ * have not already done so. This will only be called when PMBannerView's renderDelayedAd
+ * method is called.
+ *
+ * @param view The ad view sending the message.
+ */
+- (void)adViewDidRenderAd:(PMBannerView *)view;
+
 /* For PM_REQUEST_TYPE_ALL in PMClass */
 - (AdRequest *)getAdRequestObject;
 - (UIView *)getBannerAdResponse;
+- (NSMutableDictionary *)getBannerCustomEventData;
 
 @end

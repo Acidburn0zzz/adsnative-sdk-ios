@@ -131,6 +131,9 @@
     } else {
         LogWarn(@"Delegate does not implement click tracking callback. Clicks likely not being tracked.");
     }
+    if ([self.delegate respondsToSelector:@selector(nativeAdWillLeaveApplication:)]) {
+        [self.delegate nativeAdWillLeaveApplication:self];
+    }
 }
 
 - (void)nativeAdWillLogImpression:(FBNativeAd *)nativeAd

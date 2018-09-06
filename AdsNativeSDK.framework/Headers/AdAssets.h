@@ -34,6 +34,10 @@ extern const NSString *kNativeSponsoredKey;
 //Eg: "Sponsored", "Promoted"
 extern const NSString *kNativeSponsoredByTagKey;
 
+//Privacy link. May be empty
+extern const NSString *kNativePrivacyLink;
+extern const NSString *kNativePrivacyImageUrl;
+
 //May be nil. This returns a dictionary of developer defined custom assests.
 extern const NSString *kNativeCustomAssetsKey;
 
