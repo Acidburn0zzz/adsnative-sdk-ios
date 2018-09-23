@@ -61,6 +61,7 @@ extern const NSString *kNativeVideoPlayTrackerKey;
 
 //Trackers and landing url
 extern const NSString *kNativeImpressionsKey;
+extern const NSString *kNativeViewableImpressionsKey;
 extern const NSString *kNativeClicksKey;
 extern const NSString *kNativeLandingUrlKey;
 
