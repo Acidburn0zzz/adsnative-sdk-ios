@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
-#define AN_SDK_VERSION              @"3.2.3"
+#define AN_SDK_VERSION              @"3.2.4"
 
 #define AN_IOS_6_0 60000
 
@@ -28,7 +28,7 @@ typedef int PM_REQUEST_TYPE;
 extern const CGFloat kStarRatingUniversalScale;
 extern const CGFloat kMaxStarRatingValue;
 extern const CGFloat kMinStarRatingValue;
-extern const NSTimeInterval kDefaultSecondsForImpression;
+extern const NSTimeInterval kDefaultSecondsForViewableImpression;
 extern const NSTimeInterval kUpdateCellVisibilityInterval;
 extern const NSString *backupClassPrefix;
 

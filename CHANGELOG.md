@@ -1,3 +1,7 @@
+## Version 3.2.4
+-- **Impression tracking now occurs when the first pixel is visible.**
+-- **Viewability tracking occurs when 50% of the adview is visible for 1 second.**
+
 ## Version 3.2.3
 -- **Added support for PMAdChoicesView**
 -- **Exposed pmNativeAdWillLeaveApplication as a delegate callback**

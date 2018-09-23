@@ -123,17 +123,6 @@
  */
 @property (nonatomic, weak) id<AdAdapterDelegate> delegate;
 
-/**
- * Specifies how long your ad must be on screen before an impression is tracked.
- *
- * When a view containing a native ad is rendered and presented, the AdsNative SDK begins tracking the
- * amount of time the view has been visible on-screen in order to automatically record impressions.
- * This value represents the time required for an impression to be tracked.
- *
- * The default value is `kDefaultRequiredSecondsForImpression`.
- */
-@property (nonatomic, readonly) NSTimeInterval requiredSecondsForImpression;
-
 /** @name Responding to an Ad Being Attached to a View */
 
 /**
